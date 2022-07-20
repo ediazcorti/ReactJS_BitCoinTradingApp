@@ -38,13 +38,29 @@ const response = await fetch (`${BASE_URL}/login.php`, {
                 password: pass,
             }),
         });
-        console.log(response);
+        console.log(response)
+        // .then((response) => response.json())
+        //          .then((result) => console.log(getCoins(result.apiKey)))
+
     }
     catch(error) { 
 console.log(error);
     }
 
     };
+
+
+    const getCoins = (apiKey) => {
+        return fetch(`${BASE_URL}/monedas.php`, {
+          method: 'GET',
+          headers: {
+            'Content-type': 'application/json',
+            apiKey: apiKey,
+          },          
+        })
+       
+        
+      }
 
 // function logearse  (user, pass)  {
 //     // Devuelvo la promesa del fetch
