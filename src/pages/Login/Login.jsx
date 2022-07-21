@@ -20,10 +20,10 @@ const LoginPage = (props) => {
     }
     
     // Version Login Profe:
-    const logearse2 = (loginFunction) => {
-        loginFunction()
+    // const logearse2 = (loginFunction) => {
+    //     loginFunction()
 
-    }
+    // }
     
     return (
         <div>
