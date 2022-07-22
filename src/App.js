@@ -3,7 +3,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 // import Layout from './components/Layout/Layout';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import LoginPage from './pages/Login/Login';
+import Login from './pages/Login/Login';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer'
 
@@ -25,8 +25,9 @@ function App() {
 
     <BrowserRouter>
     <Header getUsuario={usuario}/>
-        <Routes>
-          <Route path="/Login" element={<LoginPage  loginFunction={logeado} />} />
+        <Routes> 
+          <Route path="/Login" element={<Login  loginFunction={logeado} />} />
+          
         </Routes>      
       <Footer />
     </BrowserRouter>
