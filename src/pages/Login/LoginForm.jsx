@@ -1,9 +1,11 @@
 import React from 'react';
 import { useRef } from 'react';
 import Login from './Login'
+import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom';
 
 
-const LoginForm = ({ onLoginUser, retornarLogin, login }) => {
+
+const LoginForm = ({ onLoginUser, retornarLogin, login, getUsuario }) => {
     const inputUserName = useRef();
     const inputPassword = useRef();
 
@@ -44,7 +46,11 @@ const LoginForm = ({ onLoginUser, retornarLogin, login }) => {
             <input type="text" ref={inputPassword} />
             <br />
 
-            <input type="button" value="Logearse" onClick={onHandleLogin} />
+              {/* <input type="button" value="Logearse" onClick={onHandleLogin} /> */}
+
+ 
+              <input type="button" value="Logearse" onClick={onHandleLogin} />
+
         </>
     )
 }

@@ -10,7 +10,13 @@ const BASE_URL = "https://crypto.develotion.com/"
 
 
 
-const Login = (props) => {
+
+
+const Login = (props, {getUsuario}) => {
+
+
+
+
     const logearse = (object) => {
         // ACA HACER UNA FUNCION QUE TERMINE RETORNANDO UN OBJETO USUARIO; MIENTRAS ESTARÁ HARDCODE
         const usuario = {
@@ -18,8 +24,9 @@ const Login = (props) => {
             id: object.id
         }
         props.loginFunction(usuario)
-        // Cambiar a Ruta HOME:
         
+        // Cambiar a Ruta HOME:
+
     }
 
 
@@ -28,15 +35,16 @@ const Login = (props) => {
 
             <h1>Hola soy pagina login</h1>
 
-            <LoginForm  retornarLogin={logearse} login={login} />
+            <LoginForm  retornarLogin={logearse} login={login} getUsuario={getUsuario} />
 
             {/* <input type="button" value="Cargar Nombre Usuario" onClick={() => {
                 logearse()
             }} /> */}
 
-            <input type="button" value="Logearse" onClick={() => {
+            {/* BOTON VIEJO DE LOGIN CON PRECARGA DE CRYPTO CRYPTO */}
+            {/* <input type="button" value="Logearse" onClick={() => {
                 login('crypto', 'crypto')
-            }} />
+            }} /> */}
 
 
 
