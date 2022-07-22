@@ -10,11 +10,11 @@ const Header = (props) =>  {
     const nombreUser = (props) => { 
        // console.log(props)
         if (props.getUsuario != null ) {
-            const { nombre } = props.getUsuario
+            const { id } = props.getUsuario
     
            return (
                <div>
-                   Bienvenido, {nombre} 
+                   Bienvenido, {id} 
                </div>
            )
         }

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import LoginForm from './LoginForm';
 
 
 
@@ -11,33 +11,30 @@ const BASE_URL = "https://crypto.develotion.com/"
 
 
 const LoginPage = (props) => {
-    const logearse = () => { 
-       // ACA HACER UNA FUNCION QUE TERMINE RETORNANDO UN OBJETO USUARIO; MIENTRAS ESTARÁ HARDCODE
+    const logearse = ({object}) => {
+        // ACA HACER UNA FUNCION QUE TERMINE RETORNANDO UN OBJETO USUARIO; MIENTRAS ESTARÁ HARDCODE
         const usuario = {
-            nombre : "Pepito",
-            apellido : "Diaz"
+            apiKey: object.apiKey,
+            id: object.id
         }
         props.loginFunction(usuario)
     }
-    
-    // Version Login Profe:
-    // const logearse2 = (loginFunction) => {
-    //     loginFunction()
 
-    // }
-    
+
     return (
         <div>
-            
+
             <h1>Hola soy pagina login</h1>
 
-            <input type="button" value="Cargar Nombre Usuario" onClick= { () => { 
+            <LoginForm  retornarLogin={logearse} />
+
+            {/* <input type="button" value="Cargar Nombre Usuario" onClick={() => {
                 logearse()
-            }}  />
- 
-            <input type="button" value="Logearse" onClick= { () => { 
+            }} /> */}
+
+            <input type="button" value="Logearse" onClick={() => {
                 login('crypto', 'crypto')
-            }}  />  
+            }} />
 
 
 
@@ -45,9 +42,9 @@ const LoginPage = (props) => {
     )
 }
 
-const login = async (user, pass) => { 
-    try { 
-const response = await fetch (`${BASE_URL}/login.php`, {
+const login = async (user, pass) => {
+    try {
+        const response = await fetch(`${BASE_URL}/login.php`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json',
@@ -57,29 +54,49 @@ const response = await fetch (`${BASE_URL}/login.php`, {
                 password: pass,
             }),
         });
-        console.log(response)
+
+
+        if (response.status == 200) {
+
+            console.log("Logeo Exitoso en API")
+            let resultado = response.json();
+            console.log(resultado);
+            return resultado;
+            // return {
+            //     apiKey: resultado.apiKey,
+            //     id: resultado.id
+            // }
+
+            //  return response.json() //.then((response) => console.log(response))
+
+
+        }
+
+        else {
+            return Promise.reject("Ha ocurrido un error" + response.status)
+        }
         // .then((response) => response.json())
         //          .then((result) => console.log(getCoins(result.apiKey)))
 
     }
-    catch(error) { 
-console.log(error);
+    catch (error) {
+        console.log(error);
     }
 
-    };
+};
 
 
-    const getCoins = (apiKey) => {
-        return fetch(`${BASE_URL}/monedas.php`, {
-          method: 'GET',
-          headers: {
+const getCoins = (apiKey) => {
+    return fetch(`${BASE_URL}/monedas.php`, {
+        method: 'GET',
+        headers: {
             'Content-type': 'application/json',
             apiKey: apiKey,
-          },          
-        })
-       
-        
-      }
+        },
+    })
+
+
+}
 
 // function logearse  (user, pass)  {
 //     // Devuelvo la promesa del fetch
@@ -105,7 +122,7 @@ console.log(error);
 // }
 
 
-   // login ('crypto', 'crypto')
+// login ('crypto', 'crypto')
 
 
 
