@@ -1,23 +1,30 @@
 import React from 'react'
 
 
-const nombreUser = (props) => { 
-    props.getUser()
-    if (props != null ) {
-       return (
-           <div>
-               Bienvenido, {props.nombre} 
-           </div>
-       )
-    }
-    else { 
-       console.log("Usuario No Loggeado")
-    }
-   }
+
 
 
 
 const Header = (props) =>  { 
+
+    const nombreUser = (props) => { 
+       // console.log(props)
+        if (props.getUsuario != null ) {
+            const { nombre } = props.getUsuario
+    
+           return (
+               <div>
+                   Bienvenido, {nombre} 
+               </div>
+           )
+        }
+        else { 
+            return false
+          // console.log("Usuario No Loggeado")
+        }
+       }
+
+
 return (
 
     <div>

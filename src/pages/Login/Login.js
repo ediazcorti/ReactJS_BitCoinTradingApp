@@ -12,9 +12,10 @@ const BASE_URL = "https://crypto.develotion.com/"
 
 const LoginPage = (props) => {
     const logearse = () => { 
-       // ACA HACER UNA FUNCION QUE TERMINE RETORNANDO UN OBJETO USUARIO; MIENTRAS HARDCODE
+       // ACA HACER UNA FUNCION QUE TERMINE RETORNANDO UN OBJETO USUARIO; MIENTRAS ESTARÁ HARDCODE
         const usuario = {
-            nombre : "Pepito"
+            nombre : "Pepito",
+            apellido : "Diaz"
         }
         props.loginFunction(usuario)
     }
