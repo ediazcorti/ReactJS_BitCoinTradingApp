@@ -1,50 +1,56 @@
 import { useEffect, useRef, useState } from 'react'
-import { registro } from '../../../Services/ServiceAsync'
+import { registro, ObtenerCiudades } from '../../../Services/ServiceAsync'
 import Button from '../../../components/UI/Button/Button'
 
 
 
-const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos }) => {
+const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudad }) => {
   const inputUserName = useRef()
   const inputPassword = useRef()
   const inputidCiudad = useRef()
   const inputidDepartamento = useRef()
+  
+  const selectValue = useRef()
+  const selectElegido = selectValue.current.value
 
   // 1. UseState de Dptos
-  const [departamentos, setDepartamentos] = useState(["Vacio", "Vacio"]);
+  const [departamentos, setDepartamentos] = useState([]);
   // 2. Funcion para Setear los Dptos
   const listarDptos = (a) =>  {
     setDepartamentos(a)
     console.log(a)
    }
    //3. Llamar una funcion nueva, que haga FuncionFetch y después haga listarDptos(response) - > actualiza lista dptos
-    const LlenarSelectDptos = () => { 
-      var dptos = []
-      
-      const response = ObtenerDepartamentos("8d9b74c168daf7f33965cf02603d94ea").then(value => value.departamentos)
-      
-      // dptos.splice(0, dptos.length, ...value.departamentos);
-      // value.departamentos.splice(0, value.departamentos.length, ...dptos
-      //         .then((result) => console.log(result))   
-      // var resultado = JSON.parse(response)
-       // console.log(dptos)        
-      // console.log(response)
-         
-      var dptos = []
-      dptos = response.departamentos
-
-     
-      console.log(dptos)
-      listarDptos(dptos)
+    const LlenarSelectDptos = () => {          
+      const response = ObtenerDepartamentos("8d9b74c168daf7f33965cf02603d94ea").then(value => listarDptos(value.departamentos))
+      console.log(departamentos)      
     }
 
     useEffect(() => {
       LlenarSelectDptos()
     }, []);
 
-   //4. Despues a eso es a lo que va a llamar el MAP
+   // 1. UseState de Ciudades + Funcion Setter
+   const [ciudades, setCiudades] = useState([]);
+   // 2. Funcion para Setear los Dptos
+   const listarCiudades = (a) =>  {
+     setCiudades(a)
+     console.log(a)
+    }
+
+
+   // 2. Funcion nueva que llame Al Fetch y despues haga listarCiudades(response) -> actalizar lista ciudades
+   const LlenarCiudades = () => {          
+    const response = ObtenerCiudades("8d9b74c168daf7f33965cf02603d94ea").then(value => listarCiudades(value.ciudades))
+    console.log(ciudades)      
+  }
+   //
    
-   // 
+   //3. UseEffect para Llamar a llenar ciudades
+   useEffect(() => {
+    LlenarCiudades()
+    console.log("Se cambió el dpto")
+  }, [selectElegido.current.value]);
 
   //funcion que toma los datos del form
   const onHandleRegistro = async e => {
@@ -89,20 +95,21 @@ const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos }) => {
 
 
         </select> */}
-{/* 
+{ 
            <select
             id="comboDepartamento"
             name="departmentId"
             className="form-control"
+            ref= {selectValue}
           >
             {departamentos.map((dpto) => {
               return (
-                <option value="Hola"   >
-                  "Hola"
+                <option key={dpto.id} value={dpto.id}   >
+                  {dpto.nombre}
                 </option>
               );
-            })}
-          </select>  */}
+            })} 
+          </select>  }
 
 
 
@@ -112,7 +119,21 @@ const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos }) => {
         <br />
         <label>Ciudad</label>
         <br />
-        <input className='form-control' type='select' ref={inputidCiudad} />
+        <select
+            id="comboCiudad"
+            name="ciudadId"
+            className="form-control"
+          >
+            {ciudades.map((ciudad) => {
+              return (
+                <option key={ciudad.id} value={ciudad.id}   >
+                  {ciudad.nombre}
+                </option>
+              );
+            })} 
+          </select>  
+
+        {/* <input className='form-control' type='select' ref={inputidCiudad} /> */}
         <br />
         <br />
         <Button

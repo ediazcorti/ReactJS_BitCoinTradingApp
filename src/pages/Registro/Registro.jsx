@@ -47,7 +47,7 @@ const Registro = ({ onRegistroUser }) => {
         <div className='card'>
           <h3>Registro screen</h3>
           <section className='card-body'>
-            <RegistroForm onRegistroUser={onRegistroUser} ObtenerDepartamentos={ObtenerDepartamentos}/>
+            <RegistroForm onRegistroUser={onRegistroUser} ObtenerDepartamentos={ObtenerDepartamentos} />
           </section>
         </div>
       </section>

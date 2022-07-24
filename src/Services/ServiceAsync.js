@@ -143,6 +143,7 @@ const ObtenerCiudades = (apiKey) => {
         });
         return fetchPromise.then((response) => {
             if (response.status === 200) {
+                
                 return response.json();
             } else {
                 return Promise.reject('Ha ocurrido un error', response.status);
@@ -160,19 +161,20 @@ const ObtenerCiudades = (apiKey) => {
 
 //OBTENER CIUDADES POR DEARTAMENTO
 
-const ObtenerCiudadesPorDepartamento = (apiKey) => {
+const ObtenerCiudadesPorDepartamento = (apiKey, idDepartamento) => {
 
     try {
-        const fetchPromise = fetch(`${BASE_URL}/ciudades.php?idDepartamento=3203`, {
+        const fetchPromise = fetch(`${BASE_URL}/ciudades.php?idDepartamento=${idDepartamento}`, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
                 apiKey: apiKey,
-
+                idDepartamento : idDepartamento
             },
         });
         return fetchPromise.then((response) => {
             if (response.status === 200) {
+                console.log(response.json());
                 return response.json();
             } else {
                 return Promise.reject('Ha ocurrido un error', response.status);
