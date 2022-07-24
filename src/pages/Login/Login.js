@@ -36,7 +36,7 @@ const Login = (props, {getUsuario}) => {
             <h1>Hola soy pagina login</h1>
 
             <LoginForm  retornarLogin={logearse} login={login} getUsuario={getUsuario} />
-
+           
             {/* <input type="button" value="Cargar Nombre Usuario" onClick={() => {
                 logearse()
             }} /> */}

@@ -7,6 +7,7 @@ import Login from './pages/Login/Login';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer'
 import Main from './pages/Dashboard/Main/Main';
+import Registro from './pages/Registro/Registro'
 
 //test1
 
@@ -50,7 +51,8 @@ function App() {
         <Routes> 
 
         <Route path="/"  element= {<Main logeado={logeado} usuario={usuario} />} />      
-        
+        <Route path="/Registro"  element= {<Registro/>} />    
+
 
         </Routes>      
       <Footer />

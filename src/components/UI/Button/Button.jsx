@@ -1,7 +1,7 @@
 const Button = ({ cta, classColor, onHandleClick }) => {
   return (
     <button className={`btn ${classColor}`} onClick={onHandleClick}>
-      {cta}
+      {/* {cta} */}
     </button>
   )
 }
