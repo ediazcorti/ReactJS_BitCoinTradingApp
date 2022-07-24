@@ -36,6 +36,64 @@ const Registro = ({ onRegistroUser }) => {
 
 
 
+const ObtenerCiudades = (apiKey) => {
+
+  try {
+      const fetchPromise = fetch(`${BASE_URL}/ciudades.php`, {
+          method: 'GET',
+          headers: {
+              'Content-type': 'application/json',
+              apiKey: apiKey,
+
+          },
+      });
+      return fetchPromise.then((response) => {
+          if (response.status === 200) {                
+              return response.json();
+          } else {
+              return Promise.reject('Ha ocurrido un error', response.status);
+          }
+
+      });
+
+  } catch (error) {
+      // si rejecta
+      console.log(error);
+  }
+};
+
+
+
+//OBTENER CIUDADES POR DEARTAMENTO
+
+const ObtenerCiudadesPorDepartamento = (apiKey, idDepartamento) => {
+
+  try {
+      const fetchPromise = fetch(`${BASE_URL}/ciudades.php?idDepartamento=${idDepartamento}`, {
+          method: 'GET',
+          headers: {
+              'Content-type': 'application/json',
+              apiKey: apiKey,
+              idDepartamento : idDepartamento
+          },
+      });
+      return fetchPromise.then((response) => {
+          if (response.status === 200) {
+              console.log(response.json());
+              response.json();
+          } else {
+              return Promise.reject('Ha ocurrido un error', response.status);
+          }
+
+      });
+
+  } catch (error) {
+      // si rejecta
+      console.log(error);
+  }
+};
+
+
 
 
 
@@ -47,7 +105,7 @@ const Registro = ({ onRegistroUser }) => {
         <div className='card'>
           <h3>Registro screen</h3>
           <section className='card-body'>
-            <RegistroForm onRegistroUser={onRegistroUser} ObtenerDepartamentos={ObtenerDepartamentos} />
+            <RegistroForm onRegistroUser={onRegistroUser} ObtenerDepartamentos={ObtenerDepartamentos} ObtenerCiudades={ObtenerCiudades} ObtenerCiudadesPorDepartamento={ObtenerCiudadesPorDepartamento}/>
           </section>
         </div>
       </section>

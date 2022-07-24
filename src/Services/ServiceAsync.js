@@ -142,8 +142,7 @@ const ObtenerCiudades = (apiKey) => {
             },
         });
         return fetchPromise.then((response) => {
-            if (response.status === 200) {
-                
+            if (response.status === 200) {                
                 return response.json();
             } else {
                 return Promise.reject('Ha ocurrido un error', response.status);
@@ -217,12 +216,7 @@ const ObtenerTransacciones = (apiKey) => {
     }
 };
 
-export {login,registro,
- getCoins,
- ObtenerCiudades,
- ObtenerDepartamentos,
- ObtenerCiudadesPorDepartamento,
- ObtenerTransacciones};
+
 
 (async () => {
     //const { apiKey } = await login("crypto", "crypto");
@@ -233,8 +227,8 @@ export {login,registro,
    // console.log(departamentos);
    // const { ciudades } = await ObtenerCiudades(apiKey);
    // console.log(ciudades);
-  //  const { ciudad } = await ObtenerCiudadesPorDepartamento(apiKey);
-   // console.log(ciudad);
+   const { ciudad } = await ObtenerCiudadesPorDepartamento("8945f0588511e363683eeb33329545af", 3207);
+    console.log(ciudad);
    // const { transacciones } = await ObtenerTransacciones(apiKey);
    // console.log(transacciones);
 
@@ -242,3 +236,9 @@ export {login,registro,
 
 })();
 
+export {login,registro,
+    getCoins,
+    ObtenerCiudades,
+    ObtenerDepartamentos,
+    ObtenerCiudadesPorDepartamento,
+    ObtenerTransacciones};

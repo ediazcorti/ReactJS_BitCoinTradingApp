@@ -1,17 +1,25 @@
 import { useEffect, useRef, useState } from 'react'
-import { registro, ObtenerCiudades } from '../../../Services/ServiceAsync'
+import { registro } from '../../../Services/ServiceAsync'
 import Button from '../../../components/UI/Button/Button'
 
 
 
-const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudad }) => {
+const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudades, ObtenerCiudadesPorDepartamento }) => {
   const inputUserName = useRef()
   const inputPassword = useRef()
   const inputidCiudad = useRef()
-  const inputidDepartamento = useRef()
+  const inputidDepartamento = useRef()  
+    let selectValue = useRef()
   
-  const selectValue = useRef()
-  const selectElegido = selectValue.current.value
+  const [value, setValue] = useState();
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  
+ 
+  // let combodepartamento = document.getElementById("comboDepartamento").value
 
   // 1. UseState de Dptos
   const [departamentos, setDepartamentos] = useState([]);
@@ -22,7 +30,7 @@ const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudad }) =
    }
    //3. Llamar una funcion nueva, que haga FuncionFetch y después haga listarDptos(response) - > actualiza lista dptos
     const LlenarSelectDptos = () => {          
-      const response = ObtenerDepartamentos("8d9b74c168daf7f33965cf02603d94ea").then(value => listarDptos(value.departamentos))
+      const response = ObtenerDepartamentos("8d9b74c168daf7f33965cf02603d94ea").then(value1 => listarDptos(value1.departamentos))
       console.log(departamentos)      
     }
 
@@ -40,17 +48,25 @@ const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudad }) =
 
 
    // 2. Funcion nueva que llame Al Fetch y despues haga listarCiudades(response) -> actalizar lista ciudades
-   const LlenarCiudades = () => {          
-    const response = ObtenerCiudades("8d9b74c168daf7f33965cf02603d94ea").then(value => listarCiudades(value.ciudades))
+   const LlenarCiudades0 = () => {          
+    const response = ObtenerCiudades("8945f0588511e363683eeb33329545af").then(value1 => listarCiudades(value1.ciudades))
     console.log(ciudades)      
   }
+  //3. Llamar una funcion nueva, que haga FuncionFetch y después haga listarDptos(response) - > actualiza lista dptos
+  const LlenarCiudades2 = (value) => {          
+    const response = ObtenerCiudadesPorDepartamento("8945f0588511e363683eeb33329545af", value).then(value1 => listarCiudades(value1.ciudades))
+    console.log(departamentos)      
+  }
+
+
+
    //
    
    //3. UseEffect para Llamar a llenar ciudades
    useEffect(() => {
-    LlenarCiudades()
+    LlenarCiudades2(value)
     console.log("Se cambió el dpto")
-  }, [selectElegido.current.value]);
+  }, [value]);
 
   //funcion que toma los datos del form
   const onHandleRegistro = async e => {
@@ -58,7 +74,9 @@ const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudad }) =
     //TOMO LOS  DATOS DE LOS IMPUT
     const userName = inputUserName.current.value
     const password = inputPassword.current.value
+    // Acá tiene que agarrar la current value del select de DPTO
     const idDepartamento = inputidDepartamento.current.value
+     // Acá tiene que agarrar la current value del select de CIUDAD
     const idCiudad = inputidCiudad.current.value
 
     if (userName !== '' && password !== '' && idDepartamento !== '' && idCiudad !== '') {
@@ -101,6 +119,7 @@ const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudad }) =
             name="departmentId"
             className="form-control"
             ref= {selectValue}
+             onChange={handleChange}
           >
             {departamentos.map((dpto) => {
               return (
@@ -119,7 +138,7 @@ const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudad }) =
         <br />
         <label>Ciudad</label>
         <br />
-        <select
+        {  <select
             id="comboCiudad"
             name="ciudadId"
             className="form-control"
@@ -131,7 +150,7 @@ const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudad }) =
                 </option>
               );
             })} 
-          </select>  
+          </select>   }
 
         {/* <input className='form-control' type='select' ref={inputidCiudad} /> */}
         <br />
