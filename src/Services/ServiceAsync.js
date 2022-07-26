@@ -168,7 +168,7 @@ const ObtenerCiudadesPorDepartamento = (apiKey, idDepartamento) => {
             headers: {
                 'Content-type': 'application/json',
                 apiKey: apiKey,
-                idDepartamento : idDepartamento
+              
             },
         });
         return fetchPromise.then((response) => {
@@ -227,8 +227,8 @@ const ObtenerTransacciones = (apiKey) => {
    // console.log(departamentos);
    // const { ciudades } = await ObtenerCiudades(apiKey);
    // console.log(ciudades);
-   const { ciudad } = await ObtenerCiudadesPorDepartamento("8945f0588511e363683eeb33329545af", 3207);
-    console.log(ciudad);
+//    const { ciudad } = await ObtenerCiudadesPorDepartamento("8945f0588511e363683eeb33329545af", 3207);
+//     console.log(ciudad);
    // const { transacciones } = await ObtenerTransacciones(apiKey);
    // console.log(transacciones);
 

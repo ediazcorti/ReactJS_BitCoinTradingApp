@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer'
-import Main from './pages/Dashboard/Main/Main';
+import Dashboard from './pages/Dashboard/Main/Dashboard';
 import Registro from './pages/Registro/Registro'
 
 //test1
@@ -50,7 +50,7 @@ function App() {
     <Header getUsuario={usuario}/>
         <Routes> 
 
-        <Route path="/"  element= {<Main logeado={logeado} usuario={usuario} />} />      
+        <Route path="/"  element= {<Dashboard logeado={logeado} usuario={usuario} />} />      
         <Route path="/Registro"  element= {<Registro/>} />    
 
 

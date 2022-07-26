@@ -1,16 +1,11 @@
 import React from "react";
-import Home from "./Home";
-import Login from "../../Login/Login";
-const Main = ({logeado, usuario}) => {
-
-return (
-<>
-<h1>MAIN</h1>
-{usuario != null ? <Home /> : <Login  loginFunction={logeado} getUsuario={usuario}/>} 
-
-</>
-
-)
-
+const Main = (props) => { 
+    return (
+        <>
+        <h1>BIENVENIDO/A AL HOME</h1>
+        <p>Usted está logeado</p>
+        </>
+    )
 }
-export default Main
+
+export default Main;

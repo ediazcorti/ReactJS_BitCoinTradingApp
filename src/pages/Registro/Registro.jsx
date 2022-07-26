@@ -74,7 +74,7 @@ const ObtenerCiudadesPorDepartamento = (apiKey, idDepartamento) => {
           headers: {
               'Content-type': 'application/json',
               apiKey: apiKey,
-              idDepartamento : idDepartamento
+            //   idDepartamento : idDepartamento
           },
       });
       return fetchPromise.then((response) => {
