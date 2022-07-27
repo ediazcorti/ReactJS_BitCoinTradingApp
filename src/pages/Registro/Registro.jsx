@@ -79,7 +79,6 @@ const ObtenerCiudadesPorDepartamento = (apiKey, idDepartamento) => {
       });
       return fetchPromise.then((response) => {
           if (response.status === 200) {
-              console.log(response.json());
               response.json();
           } else {
               return Promise.reject('Ha ocurrido un error', response.status);
