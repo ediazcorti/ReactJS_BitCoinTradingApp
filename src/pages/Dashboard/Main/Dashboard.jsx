@@ -6,7 +6,7 @@ const Dashboard = ({logeado, usuario}) => {
 return (
 <>
 <h1>MAIN</h1>
-{usuario != null ? <Main /> : <Login  loginFunction={logeado} getUsuario={usuario}/>} 
+{usuario != null ? <Main usuario={usuario}/> : <Login  loginFunction={logeado} getUsuario={usuario}/>} 
 
 </>
 

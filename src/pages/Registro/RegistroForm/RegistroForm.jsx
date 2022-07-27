@@ -9,8 +9,7 @@ const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudades, O
   const inputPassword = useRef()
   const inputidCiudad = useRef()
   const inputidDepartamento = useRef()  
-  const selectValue = useRef()
-  
+    let selectValue = useRef()
   
   const [value, setValue] = useState();
 
@@ -37,7 +36,7 @@ const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudades, O
 
     useEffect(() => {
       LlenarSelectDptos()
-    }, [value]);
+    }, []);
 
    // 1. UseState de Ciudades + Funcion Setter
    const [ciudades, setCiudades] = useState([]);
@@ -50,12 +49,12 @@ const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudades, O
 
    // 2. Funcion nueva que llame Al Fetch y despues haga listarCiudades(response) -> actalizar lista ciudades
    const LlenarCiudades0 = () => {          
-    const response = ObtenerCiudades("110c49643bcef71c02ac2ab671ac2c11").then(value1 => listarCiudades(value1.ciudades))
+    const response = ObtenerCiudades("8945f0588511e363683eeb33329545af").then(value1 => listarCiudades(value1.ciudades))
     console.log(ciudades)      
   }
   //3. Llamar una funcion nueva, que haga FuncionFetch y después haga listarDptos(response) - > actualiza lista dptos
   const LlenarCiudades2 = (value) => {          
-    const response = ObtenerCiudadesPorDepartamento("110c49643bcef71c02ac2ab671ac2c11", value).then(value1 => listarCiudades(value1.ciudades))
+    const response = ObtenerCiudadesPorDepartamento("8945f0588511e363683eeb33329545af", value).then(value1 => listarCiudades(value1.ciudades))
     console.log(departamentos)      
   }
 

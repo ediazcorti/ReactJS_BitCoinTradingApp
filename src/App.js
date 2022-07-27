@@ -8,7 +8,10 @@ import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer'
 import Dashboard from './pages/Dashboard/Main/Dashboard';
 import Registro from './pages/Registro/Registro'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+import "bootstrap-css-only"
 //test1
 
 function App() {

@@ -168,12 +168,11 @@ const ObtenerCiudadesPorDepartamento = (apiKey, idDepartamento) => {
             headers: {
                 'Content-type': 'application/json',
                 apiKey: apiKey,
-              
+                
             },
         });
         return fetchPromise.then((response) => {
             if (response.status === 200) {
-                console.log(response.json());
                 return response.json();
             } else {
                 return Promise.reject('Ha ocurrido un error', response.status);
@@ -190,10 +189,10 @@ const ObtenerCiudadesPorDepartamento = (apiKey, idDepartamento) => {
 
 //OBTENER TRANSACCIONES
 
-const ObtenerTransacciones = (apiKey) => {
+const ObtenerTransacciones = (apiKey,idUsuario) => {
 
     try {
-        const fetchPromise = fetch(`${BASE_URL}/transacciones.php?idUsuario=1`, {
+        const fetchPromise = fetch(`${BASE_URL}/transacciones.php?idUsuario=${idUsuario}`, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
@@ -215,7 +214,12 @@ const ObtenerTransacciones = (apiKey) => {
         console.log(error);
     }
 };
-
+export {login,registro,
+    getCoins,
+    ObtenerCiudades,
+    ObtenerDepartamentos,
+    ObtenerCiudadesPorDepartamento,
+    ObtenerTransacciones};
 
 
 (async () => {
@@ -227,8 +231,8 @@ const ObtenerTransacciones = (apiKey) => {
    // console.log(departamentos);
    // const { ciudades } = await ObtenerCiudades(apiKey);
    // console.log(ciudades);
-//    const { ciudad } = await ObtenerCiudadesPorDepartamento("8945f0588511e363683eeb33329545af", 3207);
-//     console.log(ciudad);
+   //const { ciudad } = await ObtenerCiudadesPorDepartamento("8945f0588511e363683eeb33329545af", 3207);
+    //console.log(ciudad);
    // const { transacciones } = await ObtenerTransacciones(apiKey);
    // console.log(transacciones);
 
@@ -236,9 +240,3 @@ const ObtenerTransacciones = (apiKey) => {
 
 })();
 
-export {login,registro,
-    getCoins,
-    ObtenerCiudades,
-    ObtenerDepartamentos,
-    ObtenerCiudadesPorDepartamento,
-    ObtenerTransacciones};
