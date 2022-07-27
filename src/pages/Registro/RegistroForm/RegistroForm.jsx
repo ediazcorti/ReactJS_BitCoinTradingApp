@@ -36,7 +36,7 @@ const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudades, O
 
     useEffect(() => {
       LlenarSelectDptos()
-    }, []);
+    }, [value]);
 
    // 1. UseState de Ciudades + Funcion Setter
    const [ciudades, setCiudades] = useState([]);
