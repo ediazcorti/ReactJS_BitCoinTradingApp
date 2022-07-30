@@ -1,6 +1,6 @@
 import React from "react";
-import Main from "./Main";
-import Login from "../../Login/Login";
+import Main from "./Main/Main";
+import Login from "../Login/Login";
 const Dashboard = ({logeado, usuario}) => {
 
 return (

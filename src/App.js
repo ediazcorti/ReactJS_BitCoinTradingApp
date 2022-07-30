@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Header from './components/Layout/Header';
 import Footer from './components/Layout/Footer'
-import Dashboard from './pages/Dashboard/Main/Dashboard';
+import Dashboard from './pages/Dashboard/Dashboard';
 import Registro from './pages/Registro/Registro'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
