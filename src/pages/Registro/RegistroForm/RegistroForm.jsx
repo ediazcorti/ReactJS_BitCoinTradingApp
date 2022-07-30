@@ -17,11 +17,18 @@ const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudad }) =
   const [departamentos, setDepartamentos] = useState([]);
   const [cSele, setCSele] = useState("None")
   const [allC, setAllC] = useState([])
+  const [allC2, setAllC2] = useState([])
   let eValue = 0
+  let eValue2 = 0
 
 const getValue = (e) => {
   eValue = e.target.value
   setCSele(eValue)
+}
+
+const getValue2 = (e) => {
+  eValue2 = e.target.value
+  setAllC2(eValue2)
 }
 
   // 2. Funcion para Setear los Dptos
@@ -72,8 +79,8 @@ const getValue = (e) => {
     //TOMO LOS  DATOS DE LOS IMPUT
     const userName = inputUserName.current.value
     const password = inputPassword.current.value
-    const idDepartamento = inputidDepartamento.current.value
-    const idCiudad = inputidCiudad.current.value
+    const idDepartamento = cSele
+    const idCiudad = allC2
 
     if (userName !== '' && password !== '' && idDepartamento !== '' && idCiudad !== '') {
       //si el usuario y el password estan completos
@@ -94,8 +101,8 @@ const getValue = (e) => {
   return ( 
     <div>
       <form>
-        <label>Username</label>
-        <br />
+        {/* <label>Username</label>
+        <br /> */}
         <h1>{cSele}</h1>
         <input className='form-control' type='text' ref={inputUserName} />
         <br />
@@ -140,6 +147,7 @@ const getValue = (e) => {
             id="comboCiudad"
             name="ciudadId"
             className="form-control"
+             onChange={getValue2}
           >
             <option value="">Seleccionar Ciudad</option>
             {allC.map((ciudad) => {
