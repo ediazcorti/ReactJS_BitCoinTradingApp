@@ -7,6 +7,8 @@ import { useState } from "react";
 
 
 const Main = ({usuario}) => { 
+
+    let apiKeyString = 'd75a3403a8c3a0cf3d2de50c51b8e36d' 
     console.log('usuario', usuario)
 
 
@@ -23,7 +25,7 @@ useEffect(() => {
  ;(async ( ) => {
     
 
-    const response= await ObtenerTransacciones('6d318f57d1687d157216701d7a8d4a4c',usuario.id).then(value => CargarTablaTransacciones (value.transacciones))
+    const response= await ObtenerTransacciones(apiKeyString, usuario.id).then(value => CargarTablaTransacciones (value.transacciones))
  })()
           
     } catch (error) {

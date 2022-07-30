@@ -9,7 +9,7 @@ const Table = ({ transacciones }) => {
           <th scope='col'>Moneda</th>
           <th scope='col'>Tipo de operacion</th>
           <th scope='col'>Cantidad</th>
-          <th scope='col'>Valor de la moneda</th>
+          <th scope='col'>Valor de la moneda (En UYU) </th>
         </tr>
       </thead>
       <tbody>

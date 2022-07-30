@@ -219,58 +219,58 @@ const ObtenerTransacciones = (apiKey,idUsuario) => {
 
 // calcular monto total invertido
 
-// const MontoTotalTransacciones = (unaListaTransacciones) => {
-//     //separo las compras de las ventas
-//     const Compras = unaListaTransacciones.filter(transaccion => transaccion.tipo_operacion == 0);
-//     const Ventas = unaListaTransacciones.filter(transaccion => transaccion.tipo_operacion != 0);
-//     let MontoTotalCompras=0;
-//     let MontoTotalVentas=0;
-//     let MontoTotalInvertido=0;
+const MontoTotalTransacciones = (unaListaTransacciones, ListaMonedas ) => {
+    //separo las compras de las ventas
+    const Compras = unaListaTransacciones.filter(transaccion => transaccion.tipo_operacion == 1);
+    const Ventas = unaListaTransacciones.filter(transaccion => transaccion.tipo_operacion != 1);
+    let MontoTotalCompras=0;
+    let MontoTotalVentas=0;
+    let MontoTotalInvertido=0;
+    
+    // calcular compras en pesos
+    //busco la moneda
+    Compras.forEach(compra => {
 
-//     // calcular compras en pesos
-//     //busco la moneda
-//     Compras.forEach(compra => {
+        ListaMonedas.forEach(moneda => {
 
-//         ListaMonedas.forEach(moneda => {
+            if (compra.moneda == moneda.id) {
 
-//             if (compra.moneda == moneda.id) {
+               let MontoDeCompras = (compra.cantidad * compra.valor_actual) ;
+               MontoTotalCompras += MontoDeCompras;
 
-//                let MontoDeCompras = (compra.cantidad * compra.valor_actual) * moneda.cotizacion;
-//                MontoTotalCompras += MontoDeCompras;
-
-//             }
-// //ya tnego la cotizacion
-//            return MontoTotalCompras;
-//         })
+            }
+//ya tnego la cotizacion
+           return MontoTotalCompras;
+        })
        
     
-//     });
+    });
 
-//     //VENTAS
-//     Ventas.forEach(venta => {
+    //VENTAS
+    Ventas.forEach(venta => {
 
-//         ListaMonedas.forEach(moneda => {
+        ListaMonedas.forEach(moneda => {
 
-//             if (venta.moneda == moneda.id) {
+            if (venta.moneda == moneda.id) {
 
-//                let MontoDeVentas = (venta.cantidad * venta.valor_actual) * moneda.cotizacion;
-//                MontoTotalVentas += MontoDeVentas;
+               let MontoDeVentas = (venta.cantidad * venta.valor_actual);
+               MontoTotalVentas += MontoDeVentas;
 
-//             }
-// //ya tnego la cotizacion
-//            return MontoTotalVentas;
-//         })
+            }
+//ya tnego la cotizacion
+           return MontoTotalVentas;
+        })
        
     
-//     });
+    });
 
-// console.log(MontoTotalCompras)
-// console.log(MontoTotalVentas)
+console.log(MontoTotalCompras)
+console.log(MontoTotalVentas)
 
-// MontoTotalInvertido = MontoTotalCompras-MontoTotalVentas;
+MontoTotalInvertido = MontoTotalCompras-MontoTotalVentas;
 
-// return MontoTotalInvertido;
-// }
+return MontoTotalInvertido;
+}
 
 
 
