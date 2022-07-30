@@ -4,7 +4,7 @@ const initialState = {
    listaMonedas :[] 
 };
 
-export const userSlice = createSlice({
+export const coinSlice = createSlice({
   name: 'coin',
   initialState,
   reducers: {

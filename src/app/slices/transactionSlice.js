@@ -3,13 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
     transactions : [],
     montoCompras: 0,
-    montoVentas:  0,
+    montoVentas: 0,
     montoTotal: 0,
     compras : [],
     ventas : [],
 };
 
-export const userSlice = createSlice({
+export const transactionSlice = createSlice({
   name: 'transaction',
   initialState,
   reducers: {
@@ -41,9 +41,12 @@ export const userSlice = createSlice({
     listarMontoCompras: (state, action) => {
         const { payload } = action;
         state.compras = state.transactions.filter((transaction) => payload.tipo_operacion == 1);
-        state.ventas = state.transactions.filter((transaction) => payload.tipo_operacion != 1);   
-        state.montoCompras = state.compras.map((compra) =>  montoCompras+= (compra.cantidad * compra.valor_actual));      
-        state.montoVentas = state.ventas.map((venta) =>  montoVentas+= (venta.cantidad * venta.valor_actual));      
+        state.ventas = state.transactions.filter((transaction) => payload.tipo_operacion != 1);  
+        // State actual de compra + un recorrido de cada compra y se le suma su monto
+        state.montoCompras = state.compras.map((compra) =>  state.montoCompras = state.montoCompras + (compra.cantidad * compra.valor_actual));
+        // Lo mismo pero con ventas
+        state.montoVentas = state.ventas.map((venta) =>  state.montoVentas = state.montoVentas + (venta.cantidad * venta.valor_actual));  
+        // Resta las compras totales de las ventas           
         state.montoTotal = state.montoCompras - state.montoVentas;       
       },
 
