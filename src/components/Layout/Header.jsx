@@ -1,17 +1,25 @@
 import React from 'react'
+import { useSelector , useDispatch } from 'react-redux';
+import { getUser, setLoginUser, setLogoutUser } from  '../../app/slices/userSlice'
 
 
 
 
+const Header = () =>  { 
+    const usuario = useSelector ((state) =>  state.user)     
+    const dispatch = useDispatch()
+   
 
+    console.log("El usuario actual es:")
+    console.log(usuario.user)
 
-const Header = (props) =>  { 
-
-    const nombreUser = (props) => { 
+    const nombreUser = () => { 
+  
        // console.log(props)
-        if (props.getUsuario != null ) {
-            const { id } = props.getUsuario
-    
+        if (usuario.apiKey != '' ) {
+           
+            // const { id } = props.getUsuario
+            const id = usuario.id
            return (
                <div>
                    Bienvenido, {id} 
@@ -24,12 +32,21 @@ const Header = (props) =>  {
         }
        }
 
+    const mostrarLogout = () =>  { 
+
+        if (nombreUser(usuario)) 
+            { 
+               return ( <button onClick={() => dispatch(setLogoutUser)  }>Desloguearse</button>)
+            }
+    }
+    
 
 return (
 
     <div>
         <h2>Header 1</h2> 
-        {   nombreUser(props)  }        
+        {   nombreUser()  }    
+        { mostrarLogout()}     
     </div>
 
 

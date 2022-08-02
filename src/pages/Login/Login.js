@@ -1,7 +1,8 @@
 import React from 'react';
 import LoginForm from './LoginForm';
-
-
+import { useSelector , useDispatch } from 'react-redux';
+import {setLoginUser} from  '../../app/slices/userSlice'
+import { useEffect } from 'react';
 
 const BASE_URL = "https://crypto.develotion.com/"
 
@@ -12,22 +13,76 @@ const BASE_URL = "https://crypto.develotion.com/"
 
 
 
-const Login = (props, {getUsuario}) => {
+const Login = (props) => {
+  
 
 
-
-
-    const logearse = (object) => {
-        // ACA HACER UNA FUNCION QUE TERMINE RETORNANDO UN OBJETO USUARIO; MIENTRAS ESTARÁ HARDCODE
-        const usuario = {
-            apiKey: object.apiKey,
-            id: object.id
+    
+    const dispatch = useDispatch();
+    
+    const login = async (user, pass) => {
+  
+        try {
+            const response = await fetch(`${BASE_URL}/login.php`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    usuario: user,
+                    password: pass,
+                }),
+            });
+    
+    
+            if (response.status == 200) {
+    
+                console.log("Logeo Exitoso en API")
+                let resultado = response.json()
+                .then((response) => dispatch(setLoginUser(response)));
+                //dispatch(setLoginUser(resultado))
+                console.log(resultado);
+                // return {
+                //     apiKey: resultado.apiKey,
+                //     id: resultado.id
+                // }
+    
+                //  return response.json() //.then((response) => console.log(response))
+    
+    
+            }
+    
+            else {
+                return Promise.reject("Ha ocurrido un error" + response.status)
+            }
+            // .then((response) => response.json())
+            //          .then((result) => console.log(getCoins(result.apiKey)))
+    
         }
-        props.loginFunction(usuario)
-        
-        // Cambiar a Ruta HOME:
-
+        catch (error) {
+            console.log(error);
+        }
+    
     }
+
+    // const logearse = (object) => {
+    //     // ACA HACER UNA FUNCION QUE TERMINE RETORNANDO UN OBJETO USUARIO; MIENTRAS ESTARÁ HARDCODE
+    //     // console.log("El parametro que me llega es:")
+    //     // console.log(object)
+    //     // // const usuario = {         
+            
+    //     // //     apiKey: object.apiKey,
+    //     // //     id: object.id
+    //     // // }
+    //     // dispatch(setLoginUser(object))
+    //     // // const user = dispatch(setLoginUser(response))
+    //     // console.log(dispatch(setLoginUser(object)))
+    //     // // console.log(props.dispatch(setLoginUser(usuario)))
+    //     // props.loginFunction(object)
+        
+    //     // Cambiar a Ruta HOME:
+
+    // }
 
 
     return (
@@ -35,7 +90,7 @@ const Login = (props, {getUsuario}) => {
 
             <h1>Hola soy pagina login</h1>
 
-            <LoginForm  retornarLogin={logearse} login={login} getUsuario={getUsuario} />
+            <LoginForm login={login}  />
            
             {/* <input type="button" value="Cargar Nombre Usuario" onClick={() => {
                 logearse()
@@ -52,48 +107,7 @@ const Login = (props, {getUsuario}) => {
     )
 }
 
-const login = async (user, pass) => {
-    try {
-        const response = await fetch(`${BASE_URL}/login.php`, {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                usuario: user,
-                password: pass,
-            }),
-        });
 
-
-        if (response.status == 200) {
-
-            console.log("Logeo Exitoso en API")
-            let resultado = response.json();
-            console.log(resultado);
-            return resultado;
-            // return {
-            //     apiKey: resultado.apiKey,
-            //     id: resultado.id
-            // }
-
-            //  return response.json() //.then((response) => console.log(response))
-
-
-        }
-
-        else {
-            return Promise.reject("Ha ocurrido un error" + response.status)
-        }
-        // .then((response) => response.json())
-        //          .then((result) => console.log(getCoins(result.apiKey)))
-
-    }
-    catch (error) {
-        console.log(error);
-    }
-
-};
 
 
 const getCoins = (apiKey) => {

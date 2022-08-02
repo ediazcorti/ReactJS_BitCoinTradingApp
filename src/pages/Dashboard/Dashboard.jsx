@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Main from "./Main/Main";
 import Login from "../Login/Login";
-const Dashboard = ({logeado, usuario}) => {
+import { useSelector , useDispatch } from 'react-redux';
+import {setLoginUser, setLogoutUser} from  '../../app/slices/userSlice'
+
+
+const Dashboard = () => {
+const usuario = useSelector((state) => state.user)
+console.log("El usuario en DASHBOARD ES")
+console.log(usuario)
+
+useEffect(() => {
+
+}, [usuario]);
 
 return (
 <>
 <h1>MAIN</h1>
-{usuario != null ? <Main usuario={usuario}/> : <Login  loginFunction={logeado} getUsuario={usuario}/>} 
+<h2>USUARIO ES: </h2>
+
+{usuario != null ? <Main /> : <Login />} 
 
 </>
 
