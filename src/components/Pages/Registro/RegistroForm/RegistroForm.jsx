@@ -166,6 +166,7 @@ const getValue2 = (e) => {
           // cta='Registro'
           classColor={'btn-primary'}
           onHandleClick={onHandleRegistro}
+          cta= "Registrarse"
         />
       </form>
     </div>
