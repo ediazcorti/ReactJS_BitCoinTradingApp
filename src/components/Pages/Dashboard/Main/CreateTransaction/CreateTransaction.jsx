@@ -9,14 +9,19 @@ import  Button  from '../../../UI/Button/Button';
 
 
 const CreateTransaction = () => {
-    
-  
+  const inputSlcMoneda = useRef()
+  const inputSlcOperacion = useRef()
+
+
+
+
+   const monedas = useSelector ((state) => state.coin.listaMonedas )
     const dispatch = useDispatch()
   //hago los usereff
     const onHandleTransaction = async e => {
       e.preventDefault()
     //recibo los datos
-      if () {
+      if (inputSlcMoneda != '' && inputSlcOperacion != undefined) {
         try {
           
           dispatch(setTransaction(transaction))
@@ -31,20 +36,28 @@ const CreateTransaction = () => {
       <>
         <form>
         
-        <select name="slsTipoOperacion" id="tripoOperacion">
+        <select name="slsTipoOperacion" id="tipoOperacion" ref={inputSlcOperacion}>
             <option value="1">Compra</option>
             <option value="2">Venta</option>
         </select>
           <br />
           <br />
-          <select name="slcMoneda" id="moneda">
-            
+          <select name="slcMoneda" id="slcmoneda" ref={inputSlcMoneda}>
+          <option value="">Seleccionar Departamento</option>
+            {monedas.map((moneda) => {
+              return (
+                <option key={moneda.id} value={moneda.id} >
+                  Moneda id: {moneda.id}
+                </option>
+              );
+            })} 
+
           </select>
           <br />
           <br />
 
           <Button
-            cta='Login'
+            cta='Agregar Transaccion'
             classColor={'btn-primary'}
             onHandleClick={onHandleTransaction}
           />
