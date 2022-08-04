@@ -13,7 +13,7 @@ const Table = () => {
   useEffect(() => {
     try {
       ;(async () => {
-        const response = await ObtenerTransacciones(user.apiKey,user.id)
+        const response = await ObtenerTransacciones(user.id)
         dispatch(setTransacciones(response.transacciones))
       })()
     } catch (error) {

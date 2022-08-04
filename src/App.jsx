@@ -5,7 +5,7 @@ import Dashboard from './components/Pages/Dashboard/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useSelector , useDispatch } from 'react-redux';
 import "bootstrap-css-only"
-import Header from './components/Pages/Dashboard/Header/Header';
+import Header from './components/Layout/Header';
 import Registro from '../src/components/Pages/Registro/Registro'
 //import { setLoginUser } from './app/slices/userSlice';
 //import { login } from './Services/ServiceAsync';
@@ -25,11 +25,11 @@ return (
 
 }
 
-const userLogged = useSelector ((state) => state.user.user)
+const userLogged = useSelector ((state) => state.user)
 
   return (<div className= 'App'>
-   
-    {!userLogged ? (userDeslogeado()): (<Dashboard />)}</div>
+     <Header/>
+    {userLogged.user == null ? (userDeslogeado()): (<Dashboard />)}</div>
   
   
   )

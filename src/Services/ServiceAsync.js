@@ -1,5 +1,10 @@
+import { setToLocalStorage, getFromLocalStorage, removeFromLocalStorage } from '../utils/storage';
+
+
 //URL BASE
+
 const BASE_URL = 'https://crypto.develotion.com';
+
 
 const login = async (user, pass) => {
 
@@ -190,14 +195,19 @@ const ObtenerCiudadesPorDepartamento = (apiKey, idDepartamento) => {
 
 //OBTENER TRANSACCIONES
 
-const ObtenerTransacciones = (apiKey,idUsuario) => {
+const ObtenerTransacciones = (idUsuario) => {
+    let apiKeyStorage = getFromLocalStorage("apiKey")
+    const apiKeyStringX = apiKeyStorage.apiKey    
+    console.log("APIKEY DE STORE DE TRANSACCIONES ES LA SIGUIENTE")
+    console.log(apiKeyStringX)
+  
 
     try {
         const fetchPromise = fetch(`${BASE_URL}/transacciones.php?idUsuario=${idUsuario}`, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
-                apiKey: apiKey,
+                apiKey: apiKeyStringX,
 
             },
         });

@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { setToLocalStorage, getFromLocalStorage, removeFromLocalStorage } from '../../utils/storage';
 
 const initialState = {
-    user: null
+    user: getFromLocalStorage("user")
     
 };
 
@@ -14,12 +15,25 @@ export const userSlice = createSlice({
 
     const {payload}= action;
     state.user=payload;
+    console.log("Me He Logeado desdde Store")
+    console.log(state.user)
+    // const payloadconvertido = payload.json.stringify()
+    setToLocalStorage("user", payload)
+    setToLocalStorage("id", payload)
+     setToLocalStorage("apiKey", payload)
+    // console.log("EL USUARIO EN LOCAL STORAGE ES::::::")
 
+    // console.log(getFromLocalStorage("user"))
+    console.log("EL APIKEY EN LOCAL STORAGE ES::::::")
+    console.log(getFromLocalStorage("apiKey"))
     },
 
     setLogoutUser: (state) => {
-
-      state.user = null;
+      removeFromLocalStorage("apiKey")
+      removeFromLocalStorage("id")
+      removeFromLocalStorage("user")
+       state.user = null;
+      console.log("Se ha deslogeado desde store")
 
     }
 
