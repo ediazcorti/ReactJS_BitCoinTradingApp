@@ -11,7 +11,7 @@ export const coinSlice = createSlice({
     // Actions
     
     //#region 1. ListarMonedas
-    listarMonedas: (state, action) => {
+    setMonedas: (state, action) => {
         const { payload } = action;
         state.listaMonedas = payload;       
       },
@@ -20,7 +20,7 @@ export const coinSlice = createSlice({
   },
 });
 
-export const { listarMonedas } = coinSlice.actions;
+export const { setMonedas } = coinSlice.actions;
 export default coinSlice.reducer;
 
 
