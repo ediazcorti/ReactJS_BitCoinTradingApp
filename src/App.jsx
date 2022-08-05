@@ -13,7 +13,7 @@ import Registro from '../src/components/Pages/Registro/Registro'
 
 function App() {
  
-const userDeslogeado = (props) => { 
+const mostrarLoginYRegistro = (props) => { 
 return (
   <>
   <br />
@@ -29,7 +29,7 @@ const userLogged = useSelector ((state) => state.user)
 
   return (<div className= 'App'>
      <Header/>
-    {userLogged.user == null ? (userDeslogeado()): (<Dashboard />)}</div>
+    {userLogged.user == null ? (mostrarLoginYRegistro()): (<Dashboard />)}</div>
   
   
   )

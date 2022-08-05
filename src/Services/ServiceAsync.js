@@ -135,14 +135,14 @@ const ObtenerDepartamentos = (apiKey) => {
 
 //OBTENER CIUDADES
 
-const ObtenerCiudades = (apiKey) => {
+const ObtenerCiudades = () => {
 
     try {
         const fetchPromise = fetch(`${BASE_URL}/ciudades.php`, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
-                apiKey: apiKey,
+               
 
             },
         });

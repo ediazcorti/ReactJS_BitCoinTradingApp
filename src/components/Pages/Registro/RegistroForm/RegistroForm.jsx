@@ -2,9 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { registro, ObtenerCiudades } from '../../../../Services/ServiceAsync'
 import Button from '../../../UI/Button/Button'
 import ServiceAsync from '../../../../Services/ServiceAsync'
+import { useSelector } from 'react-redux'
 
 
-const RegistroForm = ({ onRegistroUser, ObtenerDepartamentos, ObtenerCiudad }) => {
+const RegistroForm = ({  ObtenerDepartamentos }) => {
   const inputUserName = useRef()
   const inputPassword = useRef()
   const inputidCiudad = useRef()
@@ -39,7 +40,7 @@ const getValue2 = (e) => {
    }
    //3. Llamar una funcion nueva, que haga FuncionFetch y después haga listarDptos(response) - > actualiza lista dptos
     const LlenarSelectDptos = () => {          
-      const response = ObtenerDepartamentos("8d9b74c168daf7f33965cf02603d94ea").then(value => listarDptos(value.departamentos))
+      const response = ObtenerDepartamentos().then(value => listarDptos(value.departamentos))
    
     }
 
@@ -60,7 +61,7 @@ const getValue2 = (e) => {
 
    // 2. Funcion nueva que llame Al Fetch y despues haga listarCiudades(response) -> actalizar lista ciudades
    const LlenarCiudades = () => {          
-    const response = ObtenerCiudades("8d9b74c168daf7f33965cf02603d94ea").then(value => listarCiudades(value.ciudades))
+    const response = ObtenerCiudades().then(value => listarCiudades(value.ciudades))
     
   }
    //
@@ -88,11 +89,11 @@ const getValue2 = (e) => {
         const { apiKey, id } = await registro(userName, password,idDepartamento,idCiudad)
         //tomo el apiKey y el id y se los paso a la funcion login del serivices.js
         const user = { apiKey: apiKey, id: id,idDepartamento:idDepartamento,idCiudad:idCiudad }
-        console.log(user);
-        //creo el objeto user
-        onRegistroUser(user)
+        console.log(user);        
+        console.log("Usuario Registrado con Éxito");
+
       } catch (error) {
-        alert('Ha ocurrido un error', error)
+        alert('Ha ocurrido un error en componente registroform', error)
       }
     } else {
       alert('Por favor complete los campos')
@@ -103,7 +104,8 @@ const getValue2 = (e) => {
       <form>
         {/* <label>Username</label>
         <br /> */}
-        <h1>{cSele}</h1>
+        {cSele!="None" ? <h5>El ID del departamento seleccionado es {cSele}</h5> : false }
+        
         <input className='form-control' type='text' ref={inputUserName} />
         <br />
         <label>Password</label>
@@ -143,11 +145,17 @@ const getValue2 = (e) => {
         <br />
         <label>Ciudad</label>
         <br />
+     
         <select
             id="comboCiudad"
             name="ciudadId"
             className="form-control"
              onChange={getValue2}
+             disabled={cSele == "None"}
+
+             
+
+
           >
             <option value="">Seleccionar Ciudad</option>
             {allC.map((ciudad) => {

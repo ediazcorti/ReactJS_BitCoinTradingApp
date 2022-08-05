@@ -7,23 +7,24 @@ const Registro = ({ onRegistroUser }) => {
 
   const BASE_URL = 'https://crypto.develotion.com';
 
-  const ObtenerDepartamentos = (apiKey) => {
+  const ObtenerDepartamentos = () => {
 
     try {
         const fetchPromise = fetch(`${BASE_URL}/departamentos.php`, {
             method: 'GET',
             headers: {
                 'Content-type': 'application/json',
-                apiKey: apiKey,
+                
 
             },
         });
         return fetchPromise.then((response) => {
             if (response.status === 200) {     
+            
               let resultado = response.json()         
-              return resultado;
+               return resultado;
             } else {
-                return Promise.reject('Ha ocurrido un error', response.status);
+                return Promise.reject('Ha ocurrido un error en pantalla Registro', response.status);
             }
 
         });
@@ -105,7 +106,7 @@ const ObtenerCiudadesPorDepartamento = (apiKey, idDepartamento) => {
         <div className='card'>
           <h3>Registro screen</h3>
           <section className='card-body'>
-            <RegistroForm onRegistroUser={onRegistroUser} ObtenerDepartamentos={ObtenerDepartamentos} ObtenerCiudades={ObtenerCiudades} ObtenerCiudadesPorDepartamento={ObtenerCiudadesPorDepartamento}/>
+            <RegistroForm  ObtenerDepartamentos={ObtenerDepartamentos} ObtenerCiudades={ObtenerCiudades} ObtenerCiudadesPorDepartamento={ObtenerCiudadesPorDepartamento}/>
           </section>
         </div>
       </section>
