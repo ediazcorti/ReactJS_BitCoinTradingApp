@@ -108,6 +108,7 @@ const CreateTransaction = () => {
 
         //agregarTransaccion(usuario.user.apiKey, usuario.user.id, tipoOperacion, monedaElegida, cantidad, String(cotizacionNumber) ) 
        // const {idTransaction} = await 
+       
        agregarTransaccion(apiKeyTest, usuarioIdNumber, tipoOperacionNumber, monedaElegidaNumber, cantidadNumber, cotizacionNumber )
      //  .then((response) => dispatch(addNewTransaction(response)))  
        .then((response) => console.log(dispatch(addNewTransaction(response) )
