@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setTransacciones} from '../../../../../app/slices/transactionSlice';
 import { ObtenerTransacciones } from '../../../../../Services/ServiceAsync';
-
+import "./Table.css"
 import TableItemRow from './TableItemRow'
 
 const Table = () => {
@@ -23,7 +23,7 @@ const Table = () => {
   console.log(transactions);
   return (
   
-    <table className='table table-striped ' >
+    <table className='table table-info'  >
       <thead>
         <tr>
           <th scope='col'>Moneda</th>

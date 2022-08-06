@@ -1,5 +1,6 @@
 import React from 'react';
 import LoginForm from '../Login/LoginForm/LoginForm';
+import "./Login.css"
 // import { useSelector , useDispatch } from 'react-redux';
 // // import {setLoginUser} from  '../../app/slices/userSlice'
 // import { useEffect } from 'react';

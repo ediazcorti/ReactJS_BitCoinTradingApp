@@ -4,7 +4,7 @@ import Login from "../Login/Login";
 import Button from "../../UI/Button/Button";
 import { useSelector , useDispatch } from 'react-redux';
 import { getUser, setLoginUser, setLogoutUser } from  '../../../app/slices/userSlice'
-
+import "./Dashboard.css"
 
 
 const Dashboard = () => {

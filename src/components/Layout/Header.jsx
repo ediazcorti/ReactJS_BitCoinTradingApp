@@ -6,50 +6,48 @@ import Button from '../UI/Button/Button';
 
 
 const Header = () =>  { 
-    const usuario = useSelector ((state) =>  state.user)     
-    const usuarioid = useSelector ((state) =>  state.user.id)  
-    const dispatch = useDispatch()
+    // const usuario = useSelector ((state) =>  state.user)     
+    // const usuarioid = useSelector ((state) =>  state.user.id)  
+    // const dispatch = useDispatch()
 
     
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, [usuario]);
+    // }, [usuario]);
 
-    console.log("El usuario actual EN HEADER es:")
-    console.log(usuario.user)
-
-    const nombreUser = () => { 
+    
+    // const nombreUser = () => { 
   
-       // console.log(props)
-        if (usuarioid != null ) {
+    //    // console.log(props)
+    //     if (usuarioid != null ) {
            
-            // const { id } = props.getUsuario
-            const id = usuario.id
-           return (
-               <div>
-                   Bienvenido, {id} 
-                   <br />
-                   <Button
-                cta='Deslogearse'
-                classColor={'btn-primary'}
-                onHandleClick={() => dispatch(setLogoutUser) }
-              />
-               </div>
-           )
-        }
-        else { 
-            return false
-          // console.log("Usuario No Loggeado")
-        }
-       }
+    //         // const { id } = props.getUsuario
+    //         const id = usuario.id
+    //        return (
+    //            <div>
+    //                Bienvenido, {id} 
+    //                <br />
+    //                <Button
+    //             cta='Deslogearse'
+    //             classColor={'btn-primary'}
+    //             onHandleClick={() => dispatch(setLogoutUser) }
+    //           />
+    //            </div>
+    //        )
+    //     }
+    //     else { 
+    //         return false
+    //       // console.log("Usuario No Loggeado")
+    //     }
+    //    }
 
-    const mostrarLogout = () =>  { 
+    // const mostrarLogout = () =>  { 
 
-        if (nombreUser(usuario)) 
-            { 
-               return ( <button onClick={() => dispatch(setLogoutUser)  }>Desloguearse</button>)
-            }
-    }
+    //     if (nombreUser(usuario)) 
+    //         { 
+    //            return ( <button onClick={() => dispatch(setLogoutUser())  }>Desloguearse</button>)
+    //         }
+    // }
     
 
 return (

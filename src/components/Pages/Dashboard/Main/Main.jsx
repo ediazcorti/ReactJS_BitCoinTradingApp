@@ -36,11 +36,13 @@ useEffect(() => {
 },[usuario])
 
     return (
-        <>
+        <div className="col-11 mx-auto">
+      
         <h1>BIENVENIDO/A AL HOME</h1>
         <p>Usted está logeado</p>
         <Table transacciones={transacciones}> </Table>
-        </>
+      
+        </div>
     )
 }
 
