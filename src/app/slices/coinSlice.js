@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-   listaMonedas :[] 
+   listaMonedas : [] 
 };
 
 export const coinSlice = createSlice({
@@ -13,7 +13,9 @@ export const coinSlice = createSlice({
     //#region 1. ListarMonedas
     setMonedas: (state, action) => {
         const { payload } = action;
-        state.listaMonedas = payload;       
+        
+       // state.coin.listaMonedas = payload
+         state.listaMonedas = payload  
       },
     //#endregion
     

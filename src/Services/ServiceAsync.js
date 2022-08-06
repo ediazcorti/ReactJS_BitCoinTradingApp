@@ -1,7 +1,11 @@
 import { setToLocalStorage, getFromLocalStorage, removeFromLocalStorage } from '../utils/storage';
-
+import { useDispatch } from 'react-redux';
+import { setLogoutUser } from '../app/slices/userSlice';
 
 //URL BASE
+
+
+
 
 const BASE_URL = 'https://crypto.develotion.com';
 
@@ -79,32 +83,41 @@ const registro = async (user, pass,idDepartamento,idCiudad) => {
 };
 //TRAER MONEDAS
 
+// const getCoins = (apiKey) => {
+
+//     try {
+//         const fetchPromise = fetch(`${BASE_URL}/monedas.php`, {
+//             method: 'GET',
+//             headers: {
+//                 'Content-type': 'application/json',
+//                 apiKey: apiKey,
+
+//             },
+//         });
+//         return fetchPromise.then((response) => {
+//             if (response.status === 200) {
+//                 response.json()
+//             } else {
+//                 return Promise.reject('Ha ocurrido un error', response.status);
+//             }
+
+//         });
+
+//     } catch (error) {
+//         // si rejecta
+//         console.log(error);
+//     }
+// };
+
 const getCoins = (apiKey) => {
-
-    try {
-        const fetchPromise = fetch(`${BASE_URL}/monedas.php`, {
-            method: 'GET',
-            headers: {
-                'Content-type': 'application/json',
-                apiKey: apiKey,
-
-            },
-        });
-        return fetchPromise.then((response) => {
-            if (response.status === 200) {
-                return response.json();
-            } else {
-                return Promise.reject('Ha ocurrido un error', response.status);
-            }
-
-        });
-
-    } catch (error) {
-        // si rejecta
-        console.log(error);
-    }
-};
-
+    return fetch(`${BASE_URL}/monedas.php`, {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        apiKey: apiKey,
+      },
+    });
+  };
 //OBTENER DEPARTAMENTOS
 
 const ObtenerDepartamentos = (apiKey) => {
@@ -132,6 +145,89 @@ const ObtenerDepartamentos = (apiKey) => {
         console.log(error);
     }
 };
+
+
+// Agregar Transaccion
+
+// apiKey, idUsuario, tipoOperacion, moneda, cantidad, valorActual
+const agregarTransaccion  = async (apiKey, idUsuario,tipoOperacion,moneda, cantidad,valorActual) => {
+    try {
+
+        const response = await fetch(`${BASE_URL}/transaccion.php`, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                apiKey: apiKey,
+            },
+            body: JSON.stringify({
+                "idUsuario": idUsuario,
+                "tipoOperacion": tipoOperacion,
+                "moneda": moneda,
+                "cantidad": cantidad,
+                "valorActual": valorActual
+            }),
+        });
+
+        // si esta todo okey
+
+        if (response.status === 200) {
+            return response.json();
+        } else {
+            //return console.log(response.status)
+            Promise.reject('Ha ocurrido un error', response.status);
+        }
+
+
+
+    } catch (error) {
+        // si rejecta
+        console.log(error);
+    }
+};
+
+
+
+// const agregarTransaccionBYPOSTMAN = (apiKey, idUsuario, tipoOperacion, moneda, cantidad, valorActual) => { 
+
+
+// var myHeaders = new Headers();
+// myHeaders.append("Content-Type", "application/json");
+// myHeaders.append("apiKey", apiKey);
+
+// var raw = JSON.stringify({
+//   "idUsuario": idUsuario,
+//   "tipoOperacion": tipoOperacion,
+//   "moneda": moneda,
+//   "cantidad": cantidad,
+//   "valorActual": valorActual
+// });
+
+// var requestOptions = {
+//   method: 'POST',
+//   headers: myHeaders,
+//   body: raw,
+//   redirect: 'follow'
+// };
+
+// const fetchPromise = fetch("https://crypto.develotion.com//transacciones.php", requestOptions)
+// return fetchPromise.then( (response) => {
+//     if (response.status === 200) {                
+//         console.log("Servicio FetchCrearTransaccion RESULTADO:")
+//         console.log(response)
+//          return Promise.Resolve(  { 
+//          codigo: 200 
+    
+
+//          })
+
+//     } else {
+//         return Promise.reject('Ha ocurrido un error', response.status);
+//     }
+  
+ 
+
+// }) 
+// }
 
 //OBTENER CIUDADES
 
@@ -196,6 +292,7 @@ const ObtenerCiudadesPorDepartamento = (apiKey, idDepartamento) => {
 //OBTENER TRANSACCIONES
 
 const ObtenerTransacciones = (idUsuario) => {
+ 
     let apiKeyStorage = getFromLocalStorage("apiKey")
     const apiKeyStringX = apiKeyStorage.apiKey    
     console.log("APIKEY DE STORE DE TRANSACCIONES ES LA SIGUIENTE")
@@ -222,6 +319,7 @@ const ObtenerTransacciones = (idUsuario) => {
 
     } catch (error) {
         // si rejecta
+       
         console.log(error);
     }
 };
@@ -292,6 +390,7 @@ export {login,registro,
     ObtenerDepartamentos,
     ObtenerCiudadesPorDepartamento,
     ObtenerTransacciones,
+    agregarTransaccion,
     // MontoTotalTransacciones
 };
 

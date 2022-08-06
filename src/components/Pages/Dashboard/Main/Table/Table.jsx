@@ -4,6 +4,7 @@ import { setTransacciones} from '../../../../../app/slices/transactionSlice';
 import { ObtenerTransacciones } from '../../../../../Services/ServiceAsync';
 import "./Table.css"
 import TableItemRow from './TableItemRow'
+import { setLogoutUser } from '../../../../../app/slices/userSlice';
 
 const Table = () => {
   const dispatch = useDispatch()
@@ -17,6 +18,7 @@ const Table = () => {
         dispatch(setTransacciones(response.transacciones))
       })()
     } catch (error) {
+      dispatch(setLogoutUser())
       console.error(error)
     }
   }, [])

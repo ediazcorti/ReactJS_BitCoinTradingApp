@@ -27,13 +27,12 @@ export const transactionSlice = createSlice({
     //#endregion
 
      //#region 2. Registrar Nueva Transaccion
-    //  addNewTransaction: (state, action) => {
-    //     const { payload } = action;
-    //     state.transactions = [...state.transactions, payload];
-    //     state.compras = state.transactions.filter((transaction) => payload.tipo_operacion == 1);
-    //     state.ventas = state.transactions.filter((transaction) => payload.tipo_operacion != 1);
-        // tipo_operacion
-        // state.compras = [...state.transactions, payload];
+      addNewTransaction: (state, action) => {
+        const { payload } = action;
+         state.transactions = [...state.transactions, payload];
+         state.compras = payload.filter((transaction) => transaction.tipo_operacion == 1);
+         state.ventas = payload.filter((transaction) => transaction.tipo_operacion != 1);  
+      },
      
     //#endregion
 
@@ -54,8 +53,8 @@ export const transactionSlice = createSlice({
         // Resta las compras totales de las ventas           
         state.montoTotal = state.montoCompras - state.montoVentas;  
       }
-    }     
-    });
+       
+    }});
 
-export const { setTransacciones} = transactionSlice.actions;
+export const { setTransacciones, addNewTransaction, listarMontoCompras } = transactionSlice.actions;
 export default transactionSlice.reducer;

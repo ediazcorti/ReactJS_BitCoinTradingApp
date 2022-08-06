@@ -48,6 +48,7 @@ return (
 <h1>MAIN</h1>
 <h5>ID DE USUARIO ACTUAL ES: </h5> 
 {usuario.user.id}
+<h5>Apikey es {usuario.user.apiKey}</h5>
 {nombreUser()}
 
 {usuario != null ? <Main /> : <Login />} 
