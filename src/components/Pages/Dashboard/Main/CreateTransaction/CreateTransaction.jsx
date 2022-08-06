@@ -5,12 +5,32 @@ import { useSelector, useDispatch } from 'react-redux';
  import { setTransacciones, addNewTransaction, listarMontoCompras } from  '../../../../../app/slices/transactionSlice';
  import { agregarTransaccion } from '../../../../../Services/ServiceAsync';
 import Button from '../../../../UI/Button/Button';
+import { getCoins } from '../../../../../Services/ServiceAsync';
+import { getFromLocalStorage } from '../../../../../utils/storage';
+import { setMonedas } from '../../../../../app/slices/coinSlice';
 
 //import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom';
 
 
 
-const CreateTransaction = ({monedas}, apiKey ) => {
+const CreateTransaction = () => {
+
+   const objeto = getFromLocalStorage("apiKey")
+//   const obtenerMonedas = () => {
+//     getCoins(objeto.apiKey)
+//     .then((response) => response.json())
+//     .then((result) =>   { 
+    
+//     const arrayMonedas = result.monedas
+//     console.log("array de monedas updated es")
+//     console.log(arrayMonedas)
+//     dispatch(setMonedas(result.monedas))
+//     console.log("Dispatch de monedas resultado:") 
+// console.log(monedas) 
+// return monedas}) }
+
+  const monedas = useSelector ((state) => state.coin)
+  
   const inputSlcMoneda = useRef()
   const inputSlcOperacion = useRef()
   const inputCantidad = useRef()
@@ -40,17 +60,32 @@ const CreateTransaction = ({monedas}, apiKey ) => {
       console.log("Tipo de operacion elegida fue ")
       console.log(tipoOperacion)     
 
-      console.log("Cotizacion de moneda elegida es ")
-      
+  
 
       
       const obtenerCotizacionMoneda = (idMoneda) => { 
-        
-        const monedaEncontrada = monedas.find(moneda => {
-          return  moneda.id === idMoneda 
+        const listaMonedas = monedas.listaMonedas      
+
+        // const monedaEncontrada = listaMonedas.find(moneda => {
+        //   return  moneda.id == idMoneda 
+        // });
+
+        const monedaEncontrada = listaMonedas.find(obj => {
+          return obj.id === idMoneda;
         });
+
+        console.log("LA COTIZACION DE LA MONEDA ENCONTRADA ES!!!!!!!!!!!!!!!!!")
+        console.log(monedaEncontrada.cotizacion)
         return monedaEncontrada.cotizacion
       }
+
+      console.log("OBTENER LISTA MONEDAS EN CREATE TRANSACTION:::: RESULTADO:::")     
+      console.log(obtenerCotizacionMoneda(Number(monedaElegida)))    
+
+      // console.log("La cotizacion de la moneda ncontrada es")
+      // // Acá se fija la moneda.cotizacion de la ID 1 y sale undefined???!!!
+      // console.log((obtenerCotizacionMonedaFinal(Number(monedaElegida))))
+     
 
       if (monedaElegida != "" && tipoOperacion != "" && cantidad > 1) {
         try {
@@ -58,14 +93,46 @@ const CreateTransaction = ({monedas}, apiKey ) => {
            // apiKey, idUsuario, tipoOperacion, moneda, cantidad, valorActual
           
           // 1 
-         
-         const { idTransaccion } =  agregarTransaccion(usuario.user.apiKey, usuario.user.id, tipoOperacion, monedaElegida, cantidad, obtenerCotizacionMoneda(monedaElegida) )   
-         console.log(idTransaccion)
-        
-        
-         // const newTransaction = {            
-          //  id : idTransaccion,
-          //  usuarios_id : usuario.user.id,
+
+        const apiKeyString = String(usuario.user.apiKey)
+        const apiKeyNumber= Number(usuario.user.apiKey)
+        const apiKeyComun = usuario.user.apiKey
+        const apiKeyTest = objeto.apiKey
+        const usuarioIdNumber =  Number(usuario.user.id)
+        const tipoOperacionNumber = Number(tipoOperacion)
+        const monedaElegidaNumber = Number(monedaElegida)
+        const cantidadNumber = Number(cantidad)
+        const cotizacionNumber =  obtenerCotizacionMoneda(Number(monedaElegida))
+
+        console.log()
+
+        //agregarTransaccion(usuario.user.apiKey, usuario.user.id, tipoOperacion, monedaElegida, cantidad, String(cotizacionNumber) ) 
+       // const {idTransaction} = await 
+       agregarTransaccion(apiKeyTest, usuarioIdNumber, tipoOperacionNumber, monedaElegidaNumber, cantidadNumber, cotizacionNumber )
+     //  .then((response) => dispatch(addNewTransaction(response)))  
+       .then((response) => console.log(dispatch(addNewTransaction(response) )
+    
+       ))  
+          
+      //  console.log("SE HIZO EL FETCH EXITOSAMENTE")
+          
+          // const newTransaction  = { 
+
+          //   idUsuario: usuario.user.id,
+          //   tipoOperacion: tipoOperacionNumber,
+          //   moneda: monedaElegidaNumber,
+          //   cantidad: cantidadNumber,
+          //   valorActual: cotizacionNumber,
+          // }
+          
+
+          // dispatch(addNewTransaction(newTransaction))
+    // New transaction como la enviada por post:
+      
+        // New transaction version lo q viene del get:
+          //const newTransaction = {            
+           // id : idTransaccion,
+           // usuarios_id : usuario.user.id,
           //  tipo_operacion: 
           // }
           // const user = { apiKey: apiKey, id: id,idDepartamento:idDepartamento,idCiudad:idCiudad }
@@ -73,7 +140,7 @@ const CreateTransaction = ({monedas}, apiKey ) => {
             // dispatch(addNewTransaction(newTransaction))
 
 
-return console.log("SE HIZO EL FETCH")
+
 
           }
         

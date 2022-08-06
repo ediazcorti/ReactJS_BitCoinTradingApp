@@ -6,10 +6,12 @@ import "./Table.css"
 import TableItemRow from './TableItemRow'
 import { setLogoutUser } from '../../../../../app/slices/userSlice';
 
+
 const Table = () => {
   const dispatch = useDispatch()
   const transactions = useSelector(state => state.transactions.transactions)
   const user = useSelector(state => state.user.user)
+  
 
   useEffect(() => {
     try {
@@ -21,7 +23,7 @@ const Table = () => {
       dispatch(setLogoutUser())
       console.error(error)
     }
-  }, [])
+  }, [transactions])
   console.log(transactions);
   return (
   

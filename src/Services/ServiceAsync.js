@@ -153,10 +153,10 @@ const ObtenerDepartamentos = (apiKey) => {
 const agregarTransaccion  = async (apiKey, idUsuario,tipoOperacion,moneda, cantidad,valorActual) => {
     try {
 
-        const response = await fetch(`${BASE_URL}/transaccion.php`, {
+        const response = await fetch(`${BASE_URL}/transacciones.php`, {
             method: 'POST',
             headers: {
-                'Content-type': 'application/json',
+                'Content-Type': 'application/json',
                 apiKey: apiKey,
             },
             body: JSON.stringify({

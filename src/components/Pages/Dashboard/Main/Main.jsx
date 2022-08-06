@@ -35,28 +35,29 @@ const obtenerMonedas = () => {
     console.log(arrayMonedas)
     dispatch(setMonedas(result.monedas))
     console.log("Dispatch de monedas resultado:") 
-console.log(monedas) })
+console.log(monedas) 
+return monedas})
       
 
 
 }
 
 
-useEffect(() => {
+// useEffect(() => {
     
 
-//     try {
-//  ;(async ( ) => {
+// //     try {
+// //  ;(async ( ) => {
     
 
-//  })()
+// //  })()
           
-    // } catch (error) {
+//     // } catch (error) {
         
-    //     console.log(error)
-    // }
+//     //     console.log(error)
+//     // }
 
-},[usuario])
+// },[usuario])
 
 useEffect(() => {
   
@@ -68,6 +69,7 @@ console.log(objeto.apiKey)
 obtenerMonedas()
 console.log("Las monedas ahora son")
 console.log(monedas.listaMonedas)
+ObtenerTransacciones()
 // getCoins(objeto.apiKey)
 //   .then((response) => response.json())
 //   .then((result) =>   { 
