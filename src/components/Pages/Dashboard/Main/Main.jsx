@@ -12,6 +12,7 @@ import { setToLocalStorage, getFromLocalStorage, removeFromLocalStorage } from '
 import TableItemRow from "./Table/TableItemRow";
 import CreateTransaction from "./CreateTransaction/CreateTransaction";
 import TablaMontos from "./TablaMontos/TablaMontos";
+import Bar from "../Charts/Bar";
 
 const Main = () => { 
   const ColoredLine = ({ color }) => (
@@ -37,7 +38,7 @@ const transacciones= useSelector ((state) => state.transactions.transactions);
 const monedas = useSelector ((state) => state.coin)
 
 // const obtenerMonedas = () => { getCoins.then( (response) => { dispatch(setMonedas(response.monedas) ) } ) }
-const obtenerMonedas = () => {
+const obtenerMonedas = (objeto) => {
     getCoins(objeto.apiKey)
     .then((response) => response.json())
     .then((result) =>   { 
@@ -78,7 +79,7 @@ useEffect(() => {
 //    .then((result) => dispatch(setMonedas(result.monedas) )) 
 console.log("APIKEY DE LA STORAGE DESDE MAIN ES = ")
 console.log(objeto.apiKey)
-obtenerMonedas()
+obtenerMonedas(objeto)
 console.log("Las monedas ahora son")
 console.log(monedas.listaMonedas)
  ObtenerTransacciones()
@@ -156,9 +157,11 @@ console.log(monedas.listaMonedas)
 
         <TablaMontos/>
         <ColoredLine color="DarkBlue" />
+        <Bar monedas={monedas} />
+        <ColoredLine color="DarkBlue" />
         <CreateTransaction monedas={monedas} apiKey={usuario.user.apiKey}/>
         <ColoredLine color="DarkBlue" />
-        <Table transacciones={transacciones} obtenerMonedas={obtenerMonedas} />
+        <Table transacciones={transacciones} obtenerMonedas={obtenerMonedas} monedas={monedas} />
       
         </div>
     )

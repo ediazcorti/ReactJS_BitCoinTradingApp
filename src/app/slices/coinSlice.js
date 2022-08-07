@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { setToLocalStorage, getFromLocalStorage } from '../../utils/storage';
 
 const initialState = {
-   listaMonedas : [] 
+    listaMonedas : [] 
+ 
 };
 
 export const coinSlice = createSlice({
@@ -16,13 +18,19 @@ export const coinSlice = createSlice({
         
        // state.coin.listaMonedas = payload
          state.listaMonedas = payload  
+         setToLocalStorage("listaMonedas", payload)
       },
+
+      getMonedasActual: (state) => { 
+        state.listaMonedas = getFromLocalStorage("listaMonedas")
+        
+      }
     //#endregion
     
   },
 });
 
-export const { setMonedas } = coinSlice.actions;
+export const { setMonedas, getMonedasActual } = coinSlice.actions;
 export default coinSlice.reducer;
 
 

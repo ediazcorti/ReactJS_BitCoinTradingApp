@@ -94,9 +94,9 @@ const CreateTransaction = () => {
           
           // 1 
 
-        const apiKeyString = String(usuario.user.apiKey)
-        const apiKeyNumber= Number(usuario.user.apiKey)
-        const apiKeyComun = usuario.user.apiKey
+        // const apiKeyString = String(usuario.user.apiKey)
+        // const apiKeyNumber= Number(usuario.user.apiKey)
+        // const apiKeyComun = usuario.user.apiKey
         const apiKeyTest = objeto.apiKey
         const usuarioIdNumber =  Number(usuario.user.id)
         const tipoOperacionNumber = Number(tipoOperacion)
@@ -111,9 +111,9 @@ const CreateTransaction = () => {
        
        agregarTransaccion(apiKeyTest, usuarioIdNumber, tipoOperacionNumber, monedaElegidaNumber, cantidadNumber, cotizacionNumber )
      //  .then((response) => dispatch(addNewTransaction(response)))  
-       .then((response) => console.log(dispatch(addNewTransaction(response) )
+       .then((response) => dispatch(addNewTransaction(response) )
     
-       ))  
+       )  
           
       //  console.log("SE HIZO EL FETCH EXITOSAMENTE")
           
@@ -170,7 +170,7 @@ const CreateTransaction = () => {
         
           <br />
           <label htmlFor="SelectMonedas">Seleccione su moneda</label><br />
-          <select classname="form-control" name="slcMoneda" id="slcmoneda" ref={inputSlcMoneda}>
+          <select className="form-control" name="slcMoneda" id="slcmoneda" ref={inputSlcMoneda}>
           <option value="" disabled>Moneda</option>        
           { monedas.listaMonedas ? 
             monedas.listaMonedas.map(
@@ -190,7 +190,7 @@ const CreateTransaction = () => {
           <br />
           <br />
           <label htmlFor="Cantidad">Cantidad:</label><br />
-            <input classname="form-control" type="number" name="cantidadMonedas" id="cantidadMonedas" ref={inputCantidad} />
+            <input className="form-control" type="number" name="cantidadMonedas" id="cantidadMonedas" ref={inputCantidad} />
             <br />
             <br />
             <label htmlFor="tipoOperacion">Tipo de Operación:</label><br />

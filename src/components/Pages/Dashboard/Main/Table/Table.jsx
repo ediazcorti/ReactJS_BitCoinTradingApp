@@ -19,6 +19,19 @@ const Table = ({obtenerMonedas}) => {
   const transactions = useSelector(state => state.transactions.transactions)
   const user = useSelector(state => state.user.user)
   
+  const encontrarMoneda  = (transaction) => { 
+  
+
+    if (1+2 == 3){
+      
+      console.log("LISTA DE MONEDAS UNDEFINED??? ????? ", monedas.listaMonedas)
+      const moneda = monedas.listaMonedas.find(obj => {
+        return obj.id === transaction.moneda;
+      });
+      return moneda.nombre
+  
+    }}
+
 
   useEffect(() => {
     try {
@@ -47,10 +60,11 @@ const Table = ({obtenerMonedas}) => {
       <tbody>
         
       {transactions.map(transaction => (
-          <TableItemRow transaction={transaction}  />
+          <TableItemRow transaction={transaction} encontrarMoneda={encontrarMoneda}  monedas={monedas.listaMonedas} obtenerMonedas={obtenerMonedas} />
         ))}
       </tbody>
     </table>
   )
 }
+
 export default Table
