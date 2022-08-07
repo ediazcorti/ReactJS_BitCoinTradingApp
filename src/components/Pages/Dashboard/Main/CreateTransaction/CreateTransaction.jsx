@@ -164,19 +164,21 @@ const CreateTransaction = () => {
 
     return (
       <>
+      <h5 className="text-primary">Agregar Nueva Transacción:</h5>
         <form>
         
         
           <br />
-          <br />
-          <select name="slcMoneda" id="slcmoneda" ref={inputSlcMoneda}>
-          <option value="">SeleccionarMoneda</option>        
+          <label htmlFor="SelectMonedas">Seleccione su moneda</label><br />
+          <select classname="form-control" name="slcMoneda" id="slcmoneda" ref={inputSlcMoneda}>
+          <option value="" disabled>Moneda</option>        
           { monedas.listaMonedas ? 
             monedas.listaMonedas.map(
                     (moneda) => {
                         return (
                           <option key={moneda.id} value={moneda.id} >
-                  Moneda id: {moneda.id}
+                  Nombre Moneda: {moneda.nombre} <br />
+                  ID: {moneda.id}
                 </option>
                           
                         );
@@ -185,9 +187,13 @@ const CreateTransaction = () => {
 
 
           </select>
-
-            <input type="number" name="cantidadMonedas" id="cantidadMonedas" ref={inputCantidad} />
-
+          <br />
+          <br />
+          <label htmlFor="Cantidad">Cantidad:</label><br />
+            <input classname="form-control" type="number" name="cantidadMonedas" id="cantidadMonedas" ref={inputCantidad} />
+            <br />
+            <br />
+            <label htmlFor="tipoOperacion">Tipo de Operación:</label><br />
           <select name="slsTipoOperacion" id="tipoOperacion" ref={inputSlcOperacion}>
             <option value="1">Compra</option>
             <option value="2">Venta</option>
@@ -197,8 +203,9 @@ const CreateTransaction = () => {
           <br />
 
           <Button
+          
             cta='Agregar Transaccion'
-            classColor={'btn-primary'}
+            classColor={'btn-success'}
             onHandleClick={onHandleTransaction}
           />
         </form>

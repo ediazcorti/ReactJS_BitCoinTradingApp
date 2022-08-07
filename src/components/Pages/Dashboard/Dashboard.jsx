@@ -20,14 +20,16 @@ const nombreUser = () => {
      if (usuario.user.id != null ) {
         
          // const { id } = props.getUsuario
-         const id = usuario.id
+         const id = usuario.user.id
+         
         return (
             <div>
-                Bienvenido, {id} 
+                Bienvenido, su id de usuario es: {id} 
+                <br />
                 <br />
                 <Button
              cta='Deslogearse'
-             classColor={'btn-primary'}
+             classColor={'btn-danger'}
              onHandleClick={() =>  dispatch(setLogoutUser()) }
            />
             </div>
@@ -45,14 +47,16 @@ useEffect(() => {
 
 return (
 <>
-<h1>MAIN</h1>
-<h5>ID DE USUARIO ACTUAL ES: </h5> 
-{usuario.user.id}
-<h5>Apikey es {usuario.user.apiKey}</h5>
+<br />
+<h1>Crypto Trading Dashboard</h1>
+{/* <h5>ID DE USUARIO ACTUAL ES: </h5> 
+{usuario.user.id} */}
+{/* <h5>Apikey es {usuario.user.apiKey}</h5> */}
+<br />
 {nombreUser()}
-
+<br />
 {usuario != null ? <Main /> : <Login />} 
-
+<br />
 </>
 
 )

@@ -5,10 +5,17 @@ import { ObtenerTransacciones } from '../../../../../Services/ServiceAsync';
 import "./Table.css"
 import TableItemRow from './TableItemRow'
 import { setLogoutUser } from '../../../../../app/slices/userSlice';
+import coinSlice from '../../../../../app/slices/coinSlice';
 
 
-const Table = () => {
+
+const Table = ({obtenerMonedas}) => {
+
+
+  
+  
   const dispatch = useDispatch()
+  const monedas = useSelector ((state) => state.coin)
   const transactions = useSelector(state => state.transactions.transactions)
   const user = useSelector(state => state.user.user)
   
@@ -18,6 +25,7 @@ const Table = () => {
       ;(async () => {
         const response = await ObtenerTransacciones(user.id)
         dispatch(setTransacciones(response.transacciones))
+      
       })()
     } catch (error) {
       dispatch(setLogoutUser())
