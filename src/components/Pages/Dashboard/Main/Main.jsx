@@ -15,6 +15,7 @@ import TablaMontos from "./TablaMontos/TablaMontos";
 // import Bar from "../Charts/Bar";
 import BarCompra from "../Charts/Bar/BarCompra";
 import BarVenta from "../Charts/Bar/BarVenta/BarVenta";
+import BarMoneda from "../Charts/Bar/BarMoneda/BarMoneda";
 
 const Main = () => { 
   const ColoredLine = ({ color }) => (
@@ -48,9 +49,9 @@ const obtenerMonedas = (objeto) => {
     const arrayMonedas = result.monedas
     console.log("array de monedas updated es")
     console.log(arrayMonedas)
-    dispatch(setMonedas(result.monedas))
+    dispatch(setMonedas(arrayMonedas))
     console.log("Dispatch de monedas resultado:") 
-console.log(monedas) 
+console.log(arrayMonedas) 
 return monedas})
       
 
@@ -86,45 +87,7 @@ console.log("Las monedas ahora son")
 console.log(monedas.listaMonedas)
  ObtenerTransacciones()
 
-
-  // try {
-  //     ;(async () => {
-  //       const response = await ObtenerTransacciones(usuario.user.id)
-  //       dispatch(setTransacciones(response.transacciones))
-      
-  //     })()
-  //   } catch (error) {
-  //     dispatch(setLogoutUser())
-  //     console.error(error)
-  //   }
-
-
-
-// getCoins(objeto.apiKey)
-//   .then((response) => response.json())
-//   .then((result) =>   { 
-   
-// dispatch(setMonedas(obtenerMonedas()))
-    // console.log("La lista de monedas final es")
-    // console.log(monedas)
-
-
-
-
-//   const arrayMonedas = result.monedas
-//   console.log("array de monedas updated es")
-//   console.log(arrayMonedas)
-//   return arrayMonedas
-//     }
-  
-  
-  
-  
-        // const response = await getCoins(usuario.user.apiKey).then((response) => response.json())
-        // dispatch(setMonedas(response.monedas))
-
-
-    },[usuario])
+    },[transacciones])
 
     return (
         <div className="col-11 mx-auto">
@@ -164,6 +127,8 @@ console.log(monedas.listaMonedas)
         <BarVenta monedas={monedas} />
         <ColoredLine color="DarkBlue" />
         <CreateTransaction monedas={monedas} apiKey={usuario.user.apiKey}/>
+        <ColoredLine color="DarkBlue" />
+        <BarMoneda ObtenerTransacciones={ObtenerTransacciones} />
         <ColoredLine color="DarkBlue" />
         <Table transacciones={transacciones} obtenerMonedas={obtenerMonedas} monedas={monedas} />
       
