@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 
 
-const Bar = () => {
+const BarCompra = () => {
   const monedas = useSelector ((state) => state.coin)
   const transacciones = useSelector((state) => state.transactions.transactions);
   let listaCompras = []
@@ -17,7 +17,7 @@ const Bar = () => {
   listaMonedas.forEach(moneda => {
     // Creo un array con todas los valores de transaccion de esta moneda
     const MonedaActualMonto = [ ]   
-  transacciones.filter((transaction) => transaction.moneda == moneda.id ? MonedaActualMonto.push(transaction.valor_actual) : null)
+  transacciones.filter((transaction) => transaction.moneda == moneda.id && transaction.tipo_operacion == 1 ? MonedaActualMonto.push(transaction.valor_actual) : null)
  
   // Ahora sumo todos los montos de transacciones para esa moneda, y los guardo en una variable LET
  
@@ -112,4 +112,4 @@ const Bar = () => {
   )
 }
 
-export default Bar
+export default BarCompra

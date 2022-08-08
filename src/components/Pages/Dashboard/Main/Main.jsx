@@ -12,7 +12,9 @@ import { setToLocalStorage, getFromLocalStorage, removeFromLocalStorage } from '
 import TableItemRow from "./Table/TableItemRow";
 import CreateTransaction from "./CreateTransaction/CreateTransaction";
 import TablaMontos from "./TablaMontos/TablaMontos";
-import Bar from "../Charts/Bar";
+// import Bar from "../Charts/Bar";
+import BarCompra from "../Charts/Bar/BarCompra";
+import BarVenta from "../Charts/Bar/BarVenta/BarVenta";
 
 const Main = () => { 
   const ColoredLine = ({ color }) => (
@@ -157,7 +159,9 @@ console.log(monedas.listaMonedas)
 
         <TablaMontos/>
         <ColoredLine color="DarkBlue" />
-        <Bar monedas={monedas} />
+        <BarCompra monedas={monedas} />
+        <ColoredLine color="DarkBlue" />
+        <BarVenta monedas={monedas} />
         <ColoredLine color="DarkBlue" />
         <CreateTransaction monedas={monedas} apiKey={usuario.user.apiKey}/>
         <ColoredLine color="DarkBlue" />
