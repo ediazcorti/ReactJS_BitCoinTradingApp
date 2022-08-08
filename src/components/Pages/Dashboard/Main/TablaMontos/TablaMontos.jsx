@@ -154,7 +154,7 @@ const TablaMontos = () => {
                 <tbody>
                     <tr>
 
-                        <td>{montoTotalC}</td>
+                        <td>{ montoTotalC}</td>
                         <td>{montoTotalV}</td>
                         <td>{montoTotalFinal}</td>
                     </tr>
