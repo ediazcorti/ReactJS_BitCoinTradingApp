@@ -26,8 +26,8 @@ const TablaMontos = () => {
 
 
   // 1. UseState de montoTotalCompras y Ventas y Total
-  const [montoTotalC, setMontoTotalC] = useState([0]);
-  const [montoTotalV, setMontoTotalV] = useState([0]);
+  const [montoTotalC, setMontoTotalC] = useState(localmontoCompras);
+  const [montoTotalV, setMontoTotalV] = useState(localmontoVentas);
   const [montoTotalFinal, setMontoTotalFinal] = useState(localMontoFinal);
   // 2. Funcion para Setear el montoTotalCompras
 
@@ -74,7 +74,7 @@ const TablaMontos = () => {
         //  console.log(montoTotalCompras)
          setearMontoCompras(montoTotalCompras)
          console.log(montoTotalC)
-         setToLocalStorage("montoVentas", montoTotalCompras)
+         setToLocalStorage("montoCompras", montoTotalCompras)
     }
 
     const obtenerMontoVentas =  () => { 
