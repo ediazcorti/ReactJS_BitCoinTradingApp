@@ -35,10 +35,10 @@ const Table = ({obtenerMonedas}) => {
 
   useEffect(() => {
     try {
-      ;(async () => {
+      (async () => {
         const response = await ObtenerTransacciones(user.id)
         dispatch(setTransacciones(response.transacciones))
-      
+      console.log("============================== TABLA MONTOS REFRESH ====================")
       })()
     } catch (error) {
       dispatch(setLogoutUser())

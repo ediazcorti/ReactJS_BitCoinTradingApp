@@ -33,7 +33,7 @@ const Main = () => {
 
 const dispatch = useDispatch();
 const objeto = getFromLocalStorage("apiKey")
-console.log(objeto.apiKey)
+
 
     const usuario = useSelector((state) => state.user)
    // let apiKeyString = '75d870b288276d3978a4b205552d42b5' 
@@ -89,7 +89,7 @@ console.log("Las monedas ahora son")
 console.log(monedas.listaMonedas)
  ObtenerTransacciones()
 
-    },[transacciones])
+    },[])
 
     return (
         <div className="col-11 mx-auto">
