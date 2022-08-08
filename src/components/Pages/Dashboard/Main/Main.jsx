@@ -128,7 +128,7 @@ console.log(monedas.listaMonedas)
         <ColoredLine color="Grey" opacity="5"/>
         <BarVenta monedas={monedas} />
         <ColoredLine color="DarkBlue" opacity="80" />
-        <CreateTransaction monedas={monedas} apiKey={usuario.user.apiKey}/>
+        <CreateTransaction monedas={monedas} apiKey={usuario.user.apiKey} obtenerMonedas={obtenerMonedas}/>
         <ColoredLine color="DarkBlue" opacity="80" />
         <BarMoneda ObtenerTransacciones={ObtenerTransacciones} />
         <ColoredLine color="Orange" opacity="80" /><br />

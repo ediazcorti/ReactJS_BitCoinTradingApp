@@ -48,7 +48,8 @@ const TablaMontos = () => {
 // Object.keys(data).reduce
 
     const obtenerMontoCompras =  () => { 
-        
+        // const response2 = await ObtenerTransacciones(user.id)
+        //      dispatch(setTransacciones(response2.transacciones))
         // console.log("Valor de cada compra ============> ")
         // listaCompras.map((compra) =>  console.log(compra.cantidad * compra.valor_actual))
 
@@ -99,6 +100,7 @@ const TablaMontos = () => {
             obtenerMontoCompras()
             obtenerMontoVentas()
             obtenerMontoTotal()
+            
         } catch (error) {
             //   dispatch(setLogoutUser())
             console.log("Error en UseEffect que filtra compras y ventas")

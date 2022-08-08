@@ -2,18 +2,20 @@ import React from 'react';
 import { useRef } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
- import { setTransacciones, addNewTransaction, listarMontoCompras } from  '../../../../../app/slices/transactionSlice';
- import { agregarTransaccion } from '../../../../../Services/ServiceAsync';
+ import { setTransacciones, addNewTransaction, listarMontoCompras,  } from  '../../../../../app/slices/transactionSlice';
+ import { agregarTransaccion , ObtenerTransacciones} from '../../../../../Services/ServiceAsync';
 import Button from '../../../../UI/Button/Button';
 import { getCoins } from '../../../../../Services/ServiceAsync';
 import { getFromLocalStorage } from '../../../../../utils/storage';
 import { setMonedas } from '../../../../../app/slices/coinSlice';
+import { useEffect } from 'react';
 
 //import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom';
 
 
 
-const CreateTransaction = () => {
+const CreateTransaction = ({obtenerMonedas}) => {
+  const user = useSelector(state => state.user.user)
 
    const objeto = getFromLocalStorage("apiKey")
 //   const obtenerMonedas = () => {
@@ -36,6 +38,20 @@ const CreateTransaction = () => {
   const inputCantidad = useRef()
   const usuario = useSelector((state) => state.user)
  // COPIAR Y PEGAR LOS STATES DE SLC DPTO Y SLC CIUDAD PARA ESTO 
+
+ useEffect(() => {
+  
+  //     getCoins(usuario.user.apiKey)
+  //    .then((response) => response.json())
+  //    .then((result) => dispatch(setMonedas(result.monedas) )) 
+  console.log("APIKEY DE LA STORAGE DESDE MAIN ES = ")
+  console.log(objeto.apiKey)
+  obtenerMonedas(objeto)
+  console.log("Las monedas ahora son")
+  console.log(monedas.listaMonedas)
+   ObtenerTransacciones()
+  
+      },[])
 
 
   //  const monedas = useSelector ((state) => state.coin.listaMonedas )
@@ -60,7 +76,7 @@ const CreateTransaction = () => {
       console.log("Tipo de operacion elegida fue ")
       console.log(tipoOperacion)     
 
-  
+     
 
       
       const obtenerCotizacionMoneda = (idMoneda) => { 
@@ -112,8 +128,11 @@ const CreateTransaction = () => {
        agregarTransaccion(apiKeyTest, usuarioIdNumber, tipoOperacionNumber, monedaElegidaNumber, cantidadNumber, cotizacionNumber )
      //  .then((response) => dispatch(addNewTransaction(response)))  
        .then((response) => dispatch(addNewTransaction(response) )
-    
+
+       
        )  
+       const response2 = await ObtenerTransacciones(user.id)
+       dispatch(setTransacciones(response2.transacciones))
           
       //  console.log("SE HIZO EL FETCH EXITOSAMENTE")
           

@@ -44,7 +44,7 @@ const Table = ({obtenerMonedas}) => {
       dispatch(setLogoutUser())
       console.error(error)
     }
-  }, [transactions])
+  }, [user])
   console.log(transactions);
   return (
   
