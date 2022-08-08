@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import transactionSlice from "../../../../../app/slices/transactionSlice";
 import coinSlice from "../../../../../app/slices/coinSlice";
 import { useState } from "react";
-import { setToLocalStorage , getFromLocalStorage } from "../../../../../utils/storage";
+import { setToLocalStorage, getFromLocalStorage } from "../../../../../utils/storage";
 
 const TablaMontos = () => {
     const transacciones = useSelector((state) => state.transactions.transactions);
@@ -18,47 +18,47 @@ const TablaMontos = () => {
     let localmontoCompras = getFromLocalStorage("montoCompras")
     let localmontoVentas = getFromLocalStorage("montoVentas")
     // useEffect(() => {
-  
-        
-        
+
+
+
     //         },[])
 
 
 
-  // 1. UseState de montoTotalCompras y Ventas y Total
-  const [montoTotalC, setMontoTotalC] = useState(localmontoCompras);
-  const [montoTotalV, setMontoTotalV] = useState(localmontoVentas);
-  const [montoTotalFinal, setMontoTotalFinal] = useState(localMontoFinal);
-  // 2. Funcion para Setear el montoTotalCompras
+    // 1. UseState de montoTotalCompras y Ventas y Total
+    const [montoTotalC, setMontoTotalC] = useState(localmontoCompras);
+    const [montoTotalV, setMontoTotalV] = useState(localmontoVentas);
+    const [montoTotalFinal, setMontoTotalFinal] = useState(localMontoFinal);
+    // 2. Funcion para Setear el montoTotalCompras
 
-  const setearMontoCompras = (a) =>  {
-    setMontoTotalC(a)
-    console.log("RECIBI ESTE RESULTADO EN COMPRAS")
-    console.log(montoTotalC)
-   }
+    const setearMontoCompras = (a) => {
+        setMontoTotalC(a)
+        console.log("RECIBI ESTE RESULTADO EN COMPRAS")
+        console.log(montoTotalC)
+    }
 
-   const setearMontoVentas = (a) =>  {
-    console.log(montoTotalV)
-    setMontoTotalV(a)
-    console.log("RECIBI ESTE RESULTADO EN VENTAS")
-    console.log(montoTotalV)
-   }
+    const setearMontoVentas = (a) => {
+        console.log(montoTotalV)
+        setMontoTotalV(a)
+        console.log("RECIBI ESTE RESULTADO EN VENTAS")
+        console.log(montoTotalV)
+    }
 
-   const setearMontoTotal = (a) =>  {
-    setMontoTotalFinal(a)
-    console.log("RECIBI ESTE RESULTADO EN TOTAL")
-    console.log(montoTotalFinal)
-   }
+    const setearMontoTotal = (a) => {
+        setMontoTotalFinal(a)
+        console.log("RECIBI ESTE RESULTADO EN TOTAL")
+        console.log(montoTotalFinal)
+    }
 
-//    const initialValue = 0;
-// const montoTotalCompras = listaCompras.reduce(
-//   (previousValue, currentValue) => previousValue + currentValue,
-//   initialValue
-// );
+    //    const initialValue = 0;
+    // const montoTotalCompras = listaCompras.reduce(
+    //   (previousValue, currentValue) => previousValue + currentValue,
+    //   initialValue
+    // );
 
-// Object.keys(data).reduce
+    // Object.keys(data).reduce
 
-    const obtenerMontoCompras =  () => { 
+    const obtenerMontoCompras = () => {
         // const response2 = await ObtenerTransacciones(user.id)
         //      dispatch(setTransacciones(response2.transacciones))
         // console.log("Valor de cada compra ============> ")
@@ -68,17 +68,18 @@ const TablaMontos = () => {
 
         let montoTotalCompras = listaCompras.reduce((acumulado, compra) => acumulado + (
             compra.cantidad * compra.valor_actual)
-            
-      , 0);
-         console.log("El monto  total de compras es:___________________")
+
+            , 0);
+        console.log("El monto  total de compras es:___________________")
         //  console.log(montoTotalCompras)
-         setearMontoCompras(montoTotalCompras)
-         console.log(montoTotalC)
-         setToLocalStorage("montoCompras", montoTotalCompras)
+        setearMontoCompras(montoTotalCompras)
+        console.log(montoTotalC)
+        setToLocalStorage("montoCompras", montoTotalCompras)
+        return montoTotalCompras
     }
 
-    const obtenerMontoVentas =  () => { 
-        
+    const obtenerMontoVentas = () => {
+
         // console.log("Valor de cada compra ============> ")
         // listaCompras.map((compra) =>  console.log(compra.cantidad * compra.valor_actual))
 
@@ -86,22 +87,27 @@ const TablaMontos = () => {
 
         let montoTotalVentas = listaVentas.reduce((acumulado, venta) => acumulado + (
             venta.cantidad * venta.valor_actual)
-            
-      , 0);
-         console.log("El monto  total de VENTAS es:___________________")
+
+            , 0);
+        console.log("El monto  total de VENTAS es:___________________")
         //  console.log(montoTotalCompras)
-         setearMontoVentas(montoTotalVentas)
-         console.log(montoTotalVentas)
-         setToLocalStorage("montoVentas", montoTotalVentas)
+        setearMontoVentas(montoTotalVentas)
+        console.log(montoTotalVentas)
+        setToLocalStorage("montoVentas", montoTotalVentas)
+        return montoTotalVentas
     }
 
     const obtenerMontoTotal = () => {
+        // let montoParcialVentas = Number( listaVentas.reduce((acumulado, venta) => acumulado + (
+        //     venta.cantidad * venta.valor_actual)))
+        // let montoParcialCompras = Number( listaCompras.reduce((acumulado, compra) => acumulado + (
+        //     compra.cantidad * compra.valor_actual)))
         let montoTotal = montoTotalC - montoTotalV
         setearMontoTotal(montoTotal)
         console.log("Monto Total es", montoTotal)
         setToLocalStorage("montoTotal", montoTotal)
     }
-  
+
 
     useEffect(() => {
         try {
@@ -115,15 +121,15 @@ const TablaMontos = () => {
             obtenerMontoCompras()
             obtenerMontoVentas()
             obtenerMontoTotal()
-            
-            
+
+
         } catch (error) {
             //   dispatch(setLogoutUser())
             console.log("Error en UseEffect que filtra compras y ventas")
         }
-    }, [transacciones])
+    }, [transacciones, listaCompras])
 
-    
+
 
 
 
@@ -132,11 +138,11 @@ const TablaMontos = () => {
     // // transacciones.filter((transaction) => transaction.tipo_operacion == 1 ? listaCompras.push(transaction) : null)
     // // transacciones.filter((transaction) => transaction.tipo_operacion != 1 ? listaVentas.push(transaction) : null)
     // console.log(listaCompras)
-    
+
 
     return (
         <>
-                <h5 className="text-primary">Montos totales de Compras y Ventas en la cuenta</h5>
+            <h5 className="text-primary">Montos totales de Compras y Ventas en la cuenta</h5>
             <table className='table table-info table-bordered'>
                 <thead>
                     <tr>
