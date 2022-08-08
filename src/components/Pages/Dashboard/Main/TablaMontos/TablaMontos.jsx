@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import transactionSlice from "../../../../../app/slices/transactionSlice";
 import coinSlice from "../../../../../app/slices/coinSlice";
 import { useState } from "react";
+import { setToLocalStorage , getFromLocalStorage } from "../../../../../utils/storage";
 
 const TablaMontos = () => {
     const transacciones = useSelector((state) => state.transactions.transactions);
@@ -13,11 +14,21 @@ const TablaMontos = () => {
     let listaCompras = []
     let listaVentas = []
     //  let montoTotalCompras1 = 0
+    let localMontoFinal = getFromLocalStorage("montoTotal")
+    let localmontoCompras = getFromLocalStorage("montoCompras")
+    let localmontoVentas = getFromLocalStorage("montoVentas")
+    // useEffect(() => {
+  
+        
+        
+    //         },[])
+
+
 
   // 1. UseState de montoTotalCompras y Ventas y Total
   const [montoTotalC, setMontoTotalC] = useState([0]);
   const [montoTotalV, setMontoTotalV] = useState([0]);
-  const [montoTotalFinal, setMontoTotalFinal] = useState([0]);
+  const [montoTotalFinal, setMontoTotalFinal] = useState(localMontoFinal);
   // 2. Funcion para Setear el montoTotalCompras
 
   const setearMontoCompras = (a) =>  {
@@ -63,6 +74,7 @@ const TablaMontos = () => {
         //  console.log(montoTotalCompras)
          setearMontoCompras(montoTotalCompras)
          console.log(montoTotalC)
+         setToLocalStorage("montoVentas", montoTotalCompras)
     }
 
     const obtenerMontoVentas =  () => { 
@@ -80,13 +92,16 @@ const TablaMontos = () => {
         //  console.log(montoTotalCompras)
          setearMontoVentas(montoTotalVentas)
          console.log(montoTotalVentas)
+         setToLocalStorage("montoVentas", montoTotalVentas)
     }
 
     const obtenerMontoTotal = () => {
         let montoTotal = montoTotalC - montoTotalV
         setearMontoTotal(montoTotal)
         console.log("Monto Total es", montoTotal)
+        setToLocalStorage("montoTotal", montoTotal)
     }
+  
 
     useEffect(() => {
         try {
@@ -101,12 +116,14 @@ const TablaMontos = () => {
             obtenerMontoVentas()
             obtenerMontoTotal()
             
+            
         } catch (error) {
             //   dispatch(setLogoutUser())
             console.log("Error en UseEffect que filtra compras y ventas")
         }
     }, [transacciones])
 
+    
 
 
 
