@@ -18,12 +18,14 @@ import BarVenta from "../Charts/Bar/BarVenta/BarVenta";
 import BarMoneda from "../Charts/Bar/BarMoneda/BarMoneda";
 
 const Main = () => { 
-  const ColoredLine = ({ color }) => (
+  const ColoredLine = ({ color, opacity }) => (
     <hr
         style={{
             color: color,
             backgroundColor: color,
-            height: 3
+            height: 20,
+            opacity: opacity,
+
         }}
     />
 )
@@ -95,7 +97,7 @@ console.log(monedas.listaMonedas)
         {/* <h1>BIENVENIDO/A AL HOME</h1> */}
         
         <p>Usted está logeado</p>  <hr />
-       <ColoredLine color="DarkBlue" />
+       <ColoredLine color="Grey" opacity="5"/>
         {/* <h5>Apikey en Main es {usuario.user.apiKey}</h5> */}
         {/* <Button
             cta='GetCoins'
@@ -121,15 +123,17 @@ console.log(monedas.listaMonedas)
                                    } */}
 
         <TablaMontos/>
-        <ColoredLine color="DarkBlue" />
+        <ColoredLine color="DarkBlue" opacity="80"/>
         <BarCompra monedas={monedas} />
-        <ColoredLine color="DarkBlue" />
+        <ColoredLine color="Grey" opacity="5"/>
         <BarVenta monedas={monedas} />
-        <ColoredLine color="DarkBlue" />
+        <ColoredLine color="DarkBlue" opacity="80" />
         <CreateTransaction monedas={monedas} apiKey={usuario.user.apiKey}/>
-        <ColoredLine color="DarkBlue" />
+        <ColoredLine color="DarkBlue" opacity="80" />
         <BarMoneda ObtenerTransacciones={ObtenerTransacciones} />
-        <ColoredLine color="DarkBlue" />
+        <ColoredLine color="Orange" opacity="80" /><br />
+        <h4>Tabla de transacciones del usuario</h4><br />
+
         <Table transacciones={transacciones} obtenerMonedas={obtenerMonedas} monedas={monedas} />
       
         </div>

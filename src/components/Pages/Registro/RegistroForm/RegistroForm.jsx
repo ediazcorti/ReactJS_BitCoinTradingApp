@@ -89,7 +89,8 @@ const getValue2 = (e) => {
         const { apiKey, id } = await registro(userName, password,idDepartamento,idCiudad)
         //tomo el apiKey y el id y se los paso a la funcion login del serivices.js
         const user = { apiKey: apiKey, id: id,idDepartamento:idDepartamento,idCiudad:idCiudad }
-        console.log(user);        
+        console.log(user); 
+        alert('Se ha registrado con éxito')
         console.log("Usuario Registrado con Éxito");
 
       } catch (error) {

@@ -87,7 +87,7 @@ const CreateTransaction = () => {
       // console.log((obtenerCotizacionMonedaFinal(Number(monedaElegida))))
      
 
-      if (monedaElegida != "" && tipoOperacion != "" && cantidad > 1) {
+      if (monedaElegida != "" && tipoOperacion != "" && cantidad > 0) {
         try {
            //PONER FETCH.RESPONSE > dispatch
            // apiKey, idUsuario, tipoOperacion, moneda, cantidad, valorActual
@@ -170,8 +170,8 @@ const CreateTransaction = () => {
         
           <br />
           <label htmlFor="SelectMonedas">Seleccione su moneda</label><br />
-          <select className="form-control" name="slcMoneda" id="slcmoneda" ref={inputSlcMoneda}>
-          <option value="" disabled>Moneda</option>        
+          <select  className="form-control" name="slcMoneda" id="slcmoneda" ref={inputSlcMoneda}>
+          <option selected value="" disabled>Moneda</option>        
           { monedas.listaMonedas ? 
             monedas.listaMonedas.map(
                     (moneda) => {
@@ -190,11 +190,11 @@ const CreateTransaction = () => {
           <br />
           <br />
           <label htmlFor="Cantidad">Cantidad:</label><br />
-            <input className="form-control" type="number" name="cantidadMonedas" id="cantidadMonedas" ref={inputCantidad} />
+            <input className="form-control" min="0" type="number" name="cantidadMonedas" id="cantidadMonedas" ref={inputCantidad} />
             <br />
             <br />
             <label htmlFor="tipoOperacion">Tipo de Operación:</label><br />
-          <select name="slsTipoOperacion" id="tipoOperacion" ref={inputSlcOperacion}>
+          <select className="custom-select" name="slsTipoOperacion" id="tipoOperacion" ref={inputSlcOperacion}>
             <option value="1">Compra</option>
             <option value="2">Venta</option>
         </select>

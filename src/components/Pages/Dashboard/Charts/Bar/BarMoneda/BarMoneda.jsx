@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 
 const BarMoneda = ( {ObtenerTransacciones} ) => {
-  const [monedaSLC, setmonedaSLC] = useState("None")
+  const [monedaSLC, setmonedaSLC] = useState(null)
   let eValue = 0
   const getValue = (e) => {
     eValue = e.target.value
@@ -30,8 +30,8 @@ const BarMoneda = ( {ObtenerTransacciones} ) => {
   const [allM, setAllM] = useState("None")
   
 
-  const [listaTransacMoneda, setListaTransacMoneda] = useState("None")
- const [listaValorTransac, setListaValorTransac] = useState("None")
+  const [listaTransacMoneda, setListaTransacMoneda] = useState("")
+ const [listaValorTransac, setListaValorTransac] = useState("")
 
   //  const monedaElegidaSlc  =  allM
  
@@ -91,7 +91,7 @@ const BarMoneda = ( {ObtenerTransacciones} ) => {
    LlenarMonedas()
       
     
-    if (monedaSLC != "None")  { 
+    if (monedaSLC != null)  { 
       
      
        console.log("VALUE DE MONEDAS ES")
@@ -230,8 +230,8 @@ return arrayMonedas})
       
       <h4>Graficos de valor de la Moneda Elegida para cada transacción (Total Actual en Pesos)</h4>
       <label htmlFor="SelectMonedas">Seleccione su moneda</label><br />
-          <select className="form-control" name="slcMoneda" id="slcmoneda" ref={inputSlcMoneda} onChange={getValue} value="None" >
-           <option value="None" disabled>Seleccione una moneda</option>
+          <select className="form-control" name="slcMoneda" id="slcmoneda" ref={inputSlcMoneda} onChange={getValue}  >
+           <option selected disabled>Seleccione una moneda</option>
           { monedas.listaMonedas ? 
             monedas.listaMonedas.map(
                     (moneda) => {
@@ -246,12 +246,11 @@ return arrayMonedas})
                                    }
 
 
-          </select>
-          <h4>Resultados para la moneda elegida <br />
-              { allM[0].nombre} 
-             
-             </h4>
+          </select><br />
+          <h4>Resultados para la moneda elegida:  </h4>    
+             <h4 className="text-warning">  { allM[0].nombre} </h4>
       <ReactApexChart
+      hidden= {monedaSLC == null}
         options={data.options}
         series={data.series}
         type='bar'
