@@ -15,6 +15,7 @@ const BarMoneda = ( {ObtenerTransacciones} ) => {
   const getValue = (e) => {
     eValue = e.target.value
     setmonedaSLC(eValue)
+    setAllM(monedas.listaMonedas.filter(moneda => moneda.id == eValue))
   }
   const transactions = useSelector ((state) => state.transactions.transactions);
   const user = useSelector((state) => state.user)
@@ -92,13 +93,7 @@ const BarMoneda = ( {ObtenerTransacciones} ) => {
     
     if (monedaSLC != "None")  { 
       
-      const moneda = monedas.listaMonedas.filter(moneda => moneda.id == monedaSLC)
-       console.log("LA MONEDA A SETEAR VA A SER", moneda)    
-      // listarM(moneda)
-      setAllM(moneda)
-      // setMonedas1(moneda)
      
-      setAllM(moneda)
        console.log("VALUE DE MONEDAS ES")
        console.log(allM)  
       //     console.log(monedas1[0])
