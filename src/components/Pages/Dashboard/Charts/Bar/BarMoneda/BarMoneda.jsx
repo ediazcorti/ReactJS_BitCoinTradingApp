@@ -10,6 +10,12 @@ import { useState } from 'react';
 
 
 const BarMoneda = ( {ObtenerTransacciones} ) => {
+  const [monedaSLC, setmonedaSLC] = useState("None")
+  let eValue = 0
+  const getValue = (e) => {
+    eValue = e.target.value
+    setmonedaSLC(eValue)
+  }
   const transactions = useSelector ((state) => state.transactions.transactions);
   const user = useSelector((state) => state.user)
   const monedas = useSelector ((state) => state.coin)
@@ -21,7 +27,7 @@ const BarMoneda = ( {ObtenerTransacciones} ) => {
   let listaTransaccActual = "Vacio"
 
   const [allM, setAllM] = useState("None")
-  const [monedaSLC, setmonedaSLC] = useState("None")
+  
 
   const [listaTransacMoneda, setListaTransacMoneda] = useState("None")
  const [listaValorTransac, setListaValorTransac] = useState("None")
@@ -40,14 +46,11 @@ const BarMoneda = ( {ObtenerTransacciones} ) => {
   
   
   const dispatch = useDispatch()
-  let eValue = 1
+
 
  
 
-  const getValue = (e) => {
-    eValue = e.target.value
-    setmonedaSLC(eValue)
-  }
+  
 
   const [monedas1, setMonedas1] = useState([0]);
 
@@ -71,16 +74,24 @@ const BarMoneda = ( {ObtenerTransacciones} ) => {
     
   }
 
-  useEffect(() => {
-    LlenarMonedas();
+  // useEffect(() => {
+  //   LlenarMonedas();
     
-  }, [transactions]);
+  // }, []);
+
+  const secondFunction = async () => {
+    const result = await LlenarMonedas()
+    // do something else here after firstFunction completes
+  }
 
 
   useEffect(() => {
 
-    LlenarMonedas()
+   LlenarMonedas()
+      
+    
     if (monedaSLC != "None")  { 
+      
       const moneda = monedas.listaMonedas.filter(moneda => moneda.id == monedaSLC)
        console.log("LA MONEDA A SETEAR VA A SER", moneda)    
       // listarM(moneda)
@@ -180,7 +191,7 @@ return arrayMonedas})
     series: [
       {
         // data:  [ listaMonedas.map( (moneda) => {return `${moneda.nombre} , `} )] 
-        data:  [ listaValorTransac[0], listaValorTransac[1]  ] 
+        data:  [ ...listaValorTransac  ] 
 
 
       }
@@ -201,7 +212,7 @@ return arrayMonedas})
       xaxis: {
         //  categories:   listaMonedas.map( (moneda) => {return `${moneda.nombre} , `} ) 
         // categories:   listaTransacciones.map((transaction) => {return `${transaction.id} , `    } )
-           categories :   [ ...listaTransacMoneda  ]  
+           categories :  [  ...listaTransacMoneda ]
         
         //  categories : [ 'Hola', "Como", "Estas" ]
       }
@@ -212,8 +223,8 @@ return arrayMonedas})
       
       <h4>Graficos de valor de la Moneda Elegida para cada transacción (Total Actual en Pesos)</h4>
       <label htmlFor="SelectMonedas">Seleccione su moneda</label><br />
-          <select className="form-control" name="slcMoneda" id="slcmoneda" ref={inputSlcMoneda} onChange={getValue} >
-           
+          <select className="form-control" name="slcMoneda" id="slcmoneda" ref={inputSlcMoneda} onChange={getValue} value="None" >
+           <option value="None" disabled>Seleccione una moneda</option>
           { monedas.listaMonedas ? 
             monedas.listaMonedas.map(
                     (moneda) => {
@@ -229,8 +240,8 @@ return arrayMonedas})
 
 
           </select>
-          <h4>Resultados para la moneda elegida
-             {/* {allM[0].nombre} */}
+          <h4>Resultados para la moneda elegida <br />
+              { allM[0].nombre} 
              
              </h4>
       <ReactApexChart
