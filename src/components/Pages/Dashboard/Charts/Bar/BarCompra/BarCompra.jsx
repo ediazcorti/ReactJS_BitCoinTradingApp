@@ -94,7 +94,7 @@ const BarCompra = () => {
         enabled: true
       },
       xaxis: {
-        categories:  listaMonedas.map( (moneda) => {return `${moneda.nombre} , `} ) 
+        categories:  listaMonedas.map( (moneda) => {return `${moneda.nombre}`} ) 
       }
     }
   }
