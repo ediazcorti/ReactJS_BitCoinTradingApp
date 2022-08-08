@@ -18,16 +18,20 @@ const BarMoneda = ( {ObtenerTransacciones} ) => {
   const listaMonedas = monedas.listaMonedas
   let monedaElegida = {id: 1}
   const inputSlcMoneda = useRef()
+  let listaTransaccActual = "Vacio"
 
   const [allM, setAllM] = useState("None")
   const [monedaSLC, setmonedaSLC] = useState("None")
 
-   const monedaElegidaSlc  =  allM
+  const [listaTransacMoneda, setListaTransacMoneda] = useState("None")
+ const [listaValorTransac, setListaValorTransac] = useState("None")
+
+  //  const monedaElegidaSlc  =  allM
  
   
-  const monedaEncontrada = listaMonedas.find(obj => {
-    return obj.id == monedaElegidaSlc;
-  });
+  // const monedaEncontrada = listaMonedas.find(obj => {
+  //   return obj.id == monedaElegidaSlc;
+  // });
 
   const monedaElegidaNumber = Number(allM)
 
@@ -81,12 +85,36 @@ const BarMoneda = ( {ObtenerTransacciones} ) => {
        console.log("LA MONEDA A SETEAR VA A SER", moneda)    
       // listarM(moneda)
       setAllM(moneda)
-      setMonedas1(moneda)
-      console.log("VALUE DE MONEDAS ES")
-      console.log(allM)
+      // setMonedas1(moneda)
      
-          console.log(allM[0].id)
+      setAllM(moneda)
+       console.log("VALUE DE MONEDAS ES")
+       console.log(allM)  
+      //     console.log(monedas1[0])
           transacciones.filter((transaction) => transaction.moneda == allM[0].id ? listaTransacciones.push(transaction ) : null);
+          console.log("LA LISTA DE TRANSACCIONES PARA", allM[0].nombre, "ES LA SIGUIENTE: ", listaTransacciones)
+          console.log("EL MAPEO ME RETORNA LO SIGUIENTE:")
+          console.log(listaTransacciones.map((transaction) => {return  `'${transaction.id}' `    } ))
+          const listaTransaccActual = listaTransacciones.map((transaction) => {return (transaction.id)    } )
+          const listaValorTransac = listaTransacciones.map((transaction) => {return (transaction.valor_actual)    } )
+          // let StringCategorias = []
+          // const llenarStringCategorias = () => {  for (let i = 0; i <= listaTransaccActual.length; i++) {
+          //  let valorAPushear = 
+          //   ""  + `${listaTransaccActual[i]}` + ""
+          //   // if  (i < listaTransaccActual.length)  { 
+          //   //   valorAPushear+= ", "
+          //   // } 
+          //   StringCategorias.push(valorAPushear)          
+          // }}
+          // llenarStringCategorias()
+          let [...rest] = listaTransaccActual
+          
+          // console.log("EL STRING DE CATEGORIAS ES",  StringCategorias)
+          setListaTransacMoneda([...rest]);
+          let [...ola] = listaValorTransac
+          setListaValorTransac([...ola])
+          console.log("LA LISTA DE TRANSAC DE MONEDA ES", listaTransacMoneda)
+          // setListaTransacMoneda(listaTransacciones.map((transaction) => {return `${transaction.id} , `    } ))
     }
    
   }, [monedaSLC]);
@@ -145,15 +173,15 @@ return arrayMonedas})
   
   
   // transacciones.filter((transaction) => transaction.moneda == monedaElegidaNumber ? listaTransacciones.push(transaction) : null)
-   console.log(transactions)
-   console.log("LISTA TRANSACCIONES EN BARRA ES==============================================================================", listaTransacciones)
+
 
   
   const data = {
     series: [
       {
         // data:  [ listaMonedas.map( (moneda) => {return `${moneda.nombre} , `} )] 
-        data:  [ 1, 2, 3, 4]
+        data:  [ listaValorTransac[0], listaValorTransac[1]  ] 
+
 
       }
     ],
@@ -171,9 +199,11 @@ return arrayMonedas})
         enabled: true
       },
       xaxis: {
-        // categories:  listaMonedas.find( (moneda) => {return `${moneda.nombre} , `} ) 
-        categories :  listaTransacciones.map((transaction) => {return `${transaction.id} , ` } )   
+        //  categories:   listaMonedas.map( (moneda) => {return `${moneda.nombre} , `} ) 
+        // categories:   listaTransacciones.map((transaction) => {return `${transaction.id} , `    } )
+           categories :   [ ...listaTransacMoneda  ]  
         
+        //  categories : [ 'Hola', "Como", "Estas" ]
       }
     }
   }
