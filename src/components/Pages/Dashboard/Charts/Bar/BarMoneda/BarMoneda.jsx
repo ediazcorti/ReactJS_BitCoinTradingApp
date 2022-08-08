@@ -186,14 +186,17 @@ return arrayMonedas})
     series: [
       {
         // data:  [ listaMonedas.map( (moneda) => {return `${moneda.nombre} , `} )] 
-        data:  [ ...listaValorTransac  ] 
-
+        name: "Valor de transaccion",
+        data:  [ ...listaValorTransac  ],
+       
+      
 
       }
     ],
     options: {
       chart: {
-        type: 'bar'
+        type: 'bar',
+        
       },
       plotOptions: {
         bar: {
@@ -207,10 +210,19 @@ return arrayMonedas})
       xaxis: {
         //  categories:   listaMonedas.map( (moneda) => {return `${moneda.nombre} , `} ) 
         // categories:   listaTransacciones.map((transaction) => {return `${transaction.id} , `    } )
-           categories :  [  ...listaTransacMoneda ]
-        
+         
+           categories :  [ ...listaTransacMoneda ],
+           title: {
+            text: "Transacciones en el tiempo con sus IDs",}
         //  categories : [ 'Hola', "Como", "Estas" ]
+      },
+      subtitle:{
+        text: "Valor",
+        offsetY: -5,
+        floating: true
       }
+     
+      
     }
   }
   return (
