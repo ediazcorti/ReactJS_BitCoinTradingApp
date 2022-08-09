@@ -16,6 +16,7 @@ import TablaMontos from "./TablaMontos/TablaMontos";
 import BarCompra from "../Charts/Bar/BarCompra";
 import BarVenta from "../Charts/Bar/BarVenta/BarVenta";
 import BarMoneda from "../Charts/Bar/BarMoneda/BarMoneda";
+import IASugerencias from "../IASugerencias/IASugerencias";
 
 const Main = () => { 
   const ColoredLine = ({ color, opacity }) => (
@@ -124,6 +125,8 @@ console.log(monedas.listaMonedas)
 
         <TablaMontos/>
         <ColoredLine color="DarkBlue" opacity="80"/>
+        <IASugerencias  ObtenerTransacciones={ObtenerTransacciones} transacciones={transacciones} user={usuario.user} obtenerMonedas={obtenerMonedas} monedas={monedas}  apiKey={usuario.user.apiKey} />
+        <ColoredLine color="Grey" opacity="5"/>
         <BarCompra monedas={monedas} />
         <ColoredLine color="Grey" opacity="5"/>
         <BarVenta monedas={monedas} />
