@@ -94,7 +94,7 @@ const TablaMontos = () => {
         setearMontoVentas(montoTotalVentas)
         console.log(montoTotalVentas)
         setToLocalStorage("montoVentas", montoTotalVentas)
-        return montoTotalVentas
+        return montoTotalVentas 
     }
 
     const obtenerMontoTotal = () => {
